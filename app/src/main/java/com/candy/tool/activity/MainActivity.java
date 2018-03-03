@@ -1,4 +1,4 @@
-package tool.candy.com.candytool;
+package com.candy.tool.activity;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -6,10 +6,11 @@ import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.candy.tool.R;
+import com.candy.tool.adapter.ViewPagerAdapter;
+import com.candy.tool.fragment.CandyFragment;
+import com.candy.tool.fragment.RecommendFragment;
 import com.tool.librecycle.activity.BaseActivity;
-
-import tool.candy.com.candytool.adapter.ViewPagerAdapter;
-import tool.candy.com.candytool.fragment.CandyFragment;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
@@ -43,7 +44,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         //为viewpager设置adapter
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new CandyFragment());
-        pagerAdapter.addFragment(new CandyFragment());
+        pagerAdapter.addFragment(new RecommendFragment());
         mViewPager.setAdapter(pagerAdapter);
     }
 

@@ -1,4 +1,4 @@
-package tool.candy.com.candytool.adapter;
+package com.candy.tool.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
