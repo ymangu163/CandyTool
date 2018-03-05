@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.candy.tool.R;
+import com.candy.tool.bean.CandyBean;
 import com.candy.tool.holder.CandyViewHolder;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private final static int TYPE_FOOTER = 1;//下拉刷新
     public final static int REQUEST_REFRESH = 1;//更新
     public final static int REQUEST_LOADMORE = 2;//加载更多
-    private List<Integer> mListData = new ArrayList<>();
+    private List<CandyBean> mListData = new ArrayList<>();
     private Context mContext;
     private LinearLayoutManager mLayoutManager;
     private boolean mIsLoadMore;
@@ -51,13 +52,15 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CandyViewHolder) {
             CandyViewHolder viewHolder = (CandyViewHolder) holder;
-            viewHolder.textView.setText("第" + position + "行");
+            CandyBean candyBean = mListData.get(position);
+            viewHolder.setTitle(candyBean.getName());
+            viewHolder.setDescription(candyBean.getDescription());
             if (onItemClickListener != null) {
-                viewHolder.textView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         int position = holder.getLayoutPosition();
-                        onItemClickListener.onItemClick(position);
+                        onItemClickListener.onItemClick(mListData.get(position));
                     }
                 });
             }
@@ -85,13 +88,17 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mLayoutManager = layoutManager;
     }
 
-    public void setListData(List<Integer> data) {
+    public void setListData(List<CandyBean> data) {
         mListData.clear();
         mListData.addAll(data);
     }
 
-    public void addItemData(Integer item) {
+    public void addItemData(CandyBean item) {
         mListData.add(item);
+    }
+
+    public void addList(List<CandyBean> data) {
+        mListData.addAll(data);
     }
 
     public void clearList() {
@@ -104,7 +111,7 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(CandyBean candy);
 
         void onItemLongClick(int position);
     }

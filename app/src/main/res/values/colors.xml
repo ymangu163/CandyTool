@@ -7,4 +7,9 @@
 
     <color name="main_tab_normal">#c5c5c5</color>
     <color name="white">#ffffff</color>
+    <color name="white_80">#ccffffff</color>
+    <color name="black">#000000</color>
+    <color name="recommend">#DB4D45</color>
+    <color name="recommend_press">#CCDB4D45</color>
+    <color name="head">#48B5F4</color>
 </resources>

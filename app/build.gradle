@@ -17,11 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(":librecycle")
-
+    implementation 'cn.bmob.android:bmob-sdk:3.5.5'
+    implementation 'cn.bmob.android:http-legacy:1.0'
 
 }

@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">CandyTool</string>
+    <string name="bomb_key">ba902d8002bec5b59362195068e278c7</string>
     <string name="tab_one">糖 果</string>
     <string name="tab_two">推 荐</string>
+    <string name="coin_name">币&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;种：</string>
+    <string name="hint_input_coin_name">请输入币的名称</string>
+    <string name="invite_url">邀请链接：</string>
+    <string name="hint_input_url">请输入您的邀请链接</string>
+    <string name="coin_description">币种描述：</string>
+    <string name="hint_input_description">币种描述至少10个字</string>
+    <string name="recommend_submit">推 荐</string>
+    <string name="recommend_success">推荐成功</string>
+    <string name="recommend_fail">推荐失败，请稍后重试</string>
+    <string name="loading">正在加载，请稍等...</string>
 </resources>
