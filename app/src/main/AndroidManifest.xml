@@ -37,6 +37,22 @@
 
         <activity
             android:name=".activity.CandyDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.AboutRecommendActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.AboutUsActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.RewardActivity"
+            android:launchMode="singleTop"
             android:screenOrientation="portrait" />
     </application>
 

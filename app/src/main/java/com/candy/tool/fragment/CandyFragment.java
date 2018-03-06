@@ -107,12 +107,8 @@ public class CandyFragment extends Fragment {
         query.setLimit(mLimit);
 
         //先判断是否有缓存
-        boolean isCache = query.hasCachedResult(CandyBean.class);
-        if (isCache) {
-            query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);    // 先从缓存取数据，如果没有的话，再从网络取。
-        } else {
-            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
-        }
+//        boolean isCache = query.hasCachedResult(CandyBean.class);
+        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
 
         // 查找数据
         query.findObjects(new FindListener<CandyBean>() {

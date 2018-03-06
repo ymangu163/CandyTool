@@ -1,5 +1,6 @@
 package com.candy.tool.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.candy.tool.R;
+import com.candy.tool.activity.RewardActivity;
 import com.candy.tool.bean.CandyBean;
 import com.tool.librecycle.utils.ToastUtils;
 
@@ -29,6 +32,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     private EditText mNameEdit;
     private EditText mUrlEdit;
     private EditText mDescriptionEdit;
+    private TextView mRewardTv;
 
     @Nullable
     @Override
@@ -37,7 +41,9 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mNameEdit = rootView.findViewById(R.id.coin_name_et);
         mUrlEdit = rootView.findViewById(R.id.coin_url_et);
         mDescriptionEdit = rootView.findViewById(R.id.coin_description_et);
+        mRewardTv = rootView.findViewById(R.id.recommend_reward_tv);
         rootView.findViewById(R.id.coin_recommend_tv).setOnClickListener(this);
+        mRewardTv.setOnClickListener(this);
 
         return rootView;
     }
@@ -47,8 +53,9 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         int vId = view.getId();
         if (vId == R.id.coin_recommend_tv) {
             submit();
+        } else if (vId == R.id.recommend_reward_tv) {
+            startActivity(new Intent(getActivity(), RewardActivity.class));
         }
-
 
     }
 
@@ -78,6 +85,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                     mNameEdit.setText("");
                     mUrlEdit.setText("");
                     mDescriptionEdit.setText("");
+                    mRewardTv.setVisibility(View.VISIBLE);
                 } else {
                     Log.i("bmob", "失败：" + exception.getMessage() + "," + exception.getErrorCode());
                     ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));

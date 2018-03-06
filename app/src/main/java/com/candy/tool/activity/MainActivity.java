@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.candy.tool.R;
 import com.candy.tool.adapter.ViewPagerAdapter;
 import com.candy.tool.fragment.CandyFragment;
+import com.candy.tool.fragment.MyInfoFragment;
 import com.candy.tool.fragment.RecommendFragment;
 import com.tool.librecycle.activity.BaseActivity;
 
@@ -45,7 +46,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         pagerAdapter.addFragment(new CandyFragment());
         pagerAdapter.addFragment(new RecommendFragment());
+        pagerAdapter.addFragment(new MyInfoFragment());
         mViewPager.setAdapter(pagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
     }
 
     @Override
@@ -58,6 +61,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 return true;//返回true,否则tab按钮不变色,未被选中
             case R.id.tab_recommend:
                 clickTabTwo();
+                return true;
+            case R.id.tab_my:
+                clickTabThree();
                 return true;
 
             default:
@@ -80,7 +86,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
             case 1:
                 mBottomNavigationView.setSelectedItemId(R.id.tab_recommend);
                 break;
-
+            case 2:
+                mBottomNavigationView.setSelectedItemId(R.id.tab_my);
+                break;
             default:
                 break;
         }

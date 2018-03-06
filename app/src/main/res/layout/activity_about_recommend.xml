@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/about_recommend_goal"
+        android:textSize="18sp"
+        android:layout_marginTop="40dp"
+        android:lineSpacingMultiplier="1.3"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/about_recommend_reward"
+        android:textSize="18sp"
+        android:lineSpacingMultiplier="1.3"
+        />
+    <TextView
+        android:id="@+id/about_reward_tv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="@string/reward"
+        android:background="@drawable/selector_reward"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="38dp"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        />
+</LinearLayout>

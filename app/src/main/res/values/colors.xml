@@ -9,7 +9,11 @@
     <color name="white">#ffffff</color>
     <color name="white_80">#ccffffff</color>
     <color name="black">#000000</color>
+    <color name="black_80">#cc000000</color>
     <color name="recommend">#DB4D45</color>
     <color name="recommend_press">#CCDB4D45</color>
-    <color name="head">#48B5F4</color>
+    <color name="head">#EA4D8F</color>
+    <color name="reward">#EA4D8F</color>
+    <color name="reward_80">#CCEA4D8F</color>
+    <color name="divider">#D8D8D8</color>
 </resources>
