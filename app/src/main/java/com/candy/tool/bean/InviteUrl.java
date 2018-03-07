@@ -1,5 +1,7 @@
 package com.candy.tool.bean;
 
+import java.io.Serializable;
+
 /**
  * File description
  *
@@ -7,7 +9,7 @@ package com.candy.tool.bean;
  * @date 2018/3/6
  */
 
-public class InviteUrl  {
+public class InviteUrl implements Serializable {
     private String urlContent;
     private int chance;
 
