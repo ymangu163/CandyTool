@@ -3,14 +3,14 @@
 
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="@color/recommend_press" />
+            <solid android:color="@color/reward_80" />
             <corners android:radius="24dp"/>
         </shape>
     </item>
     <item>
         <shape>
 
-            <solid android:color="@color/recommend" />
+            <solid android:color="@color/reward" />
             <corners android:radius="24dp"/>
         </shape>
     </item>

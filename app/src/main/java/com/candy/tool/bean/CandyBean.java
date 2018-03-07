@@ -1,5 +1,7 @@
 package com.candy.tool.bean;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 
 /**
@@ -11,10 +13,11 @@ import cn.bmob.v3.BmobObject;
 
 public class CandyBean extends BmobObject {
     private String name;
-    private String url;
+    private String urlPrefix;
     private String description;
     private Integer priority = 3;
     private boolean canRecommend = true;
+    private List<InviteUrl> inviteUrls;
 
     public String getName() {
         return name;
@@ -24,12 +27,12 @@ public class CandyBean extends BmobObject {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
+    public String getUrlPrefix() {
+        return urlPrefix;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setUrlPrefix(String urlPrefix) {
+        this.urlPrefix = urlPrefix;
     }
 
     public String getDescription() {
@@ -54,5 +57,13 @@ public class CandyBean extends BmobObject {
 
     public void setCanRecommend(boolean canRecommend) {
         this.canRecommend = canRecommend;
+    }
+
+    public List<InviteUrl> getInviteUrls() {
+        return inviteUrls;
+    }
+
+    public void setInviteUrls(List<InviteUrl> inviteUrls) {
+        this.inviteUrls = inviteUrls;
     }
 }

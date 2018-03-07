@@ -24,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
@@ -45,7 +46,7 @@ public class CandyFragment extends Fragment {
     private int mCount;
     private Handler mHandler = new Handler();
     private CommonSharePref mSharePref;
-    private int mLimit = 9; // 每页的数据是10条
+    private int mLimit = 10; // 每页的数据是10条
     private int mCurPage = 0; // 当前页的编号，从0开始
 
     @Override
@@ -55,7 +56,8 @@ public class CandyFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.candy_recycler);
         initRefreshLayout();
         initRecyclerView();
-        queryData(0, CandyAdapter.REQUEST_REFRESH);
+        mRefreshLayout.setRefreshing(true);
+        queryData(0, CandyAdapter.REQUEST_REFRESH,true);
         return rootView;
     }
 
@@ -78,23 +80,36 @@ public class CandyFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //具体操作
-                queryData(0, CandyAdapter.REQUEST_REFRESH);
+                queryData(0, CandyAdapter.REQUEST_REFRESH, true);
             }
         });
     }
 
-    private void queryData(int page, final int actionType) {
+    public void refreshSysData() {
+        queryData(0, CandyAdapter.REQUEST_REFRESH, false);
+    }
+
+    private void queryData(int page, final int actionType, boolean useCache) {
         BmobQuery<CandyBean> query = new BmobQuery<>();
         query.order("-createdAt");
+        // 处理时间查询
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
 
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
-        } else {
-            // 处理时间查询
-            Date date = null;
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String dateNowStr = dateFormat.format(new Date());
+            dateNowStr = dateNowStr.substring(0, 14) + "00:00";
             try {
-                date = sdf.parse(mSharePref.getCandyLastTime());
+                date = dateFormat.parse(dateNowStr);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+        } else {
+
+            try {
+                date = dateFormat.parse(mSharePref.getCandyLastTime());
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -107,9 +122,12 @@ public class CandyFragment extends Fragment {
         query.setLimit(mLimit);
 
         //先判断是否有缓存
-//        boolean isCache = query.hasCachedResult(CandyBean.class);
-        query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
-
+        boolean isCache = query.hasCachedResult(CandyBean.class);
+        if (isCache && useCache) {
+            query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
+        } else {
+            query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
+        }
         // 查找数据
         query.findObjects(new FindListener<CandyBean>() {
             @Override
@@ -176,7 +194,7 @@ public class CandyFragment extends Fragment {
                     }
 
                     mCandyAdapter.startLoad();
-                    queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE);
+                    queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE, true);
                 }
             }
 

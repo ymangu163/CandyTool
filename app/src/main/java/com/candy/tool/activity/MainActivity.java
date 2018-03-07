@@ -18,6 +18,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private ViewPager mViewPager;
     private BottomNavigationView mBottomNavigationView;
     private TextView mTitle;
+    private CandyFragment mCandyFragment;
 
     @Override
     public int getLayoutId() {
@@ -43,8 +44,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         mBottomNavigationView.setSelectedItemId(R.id.tab_candy);//根据具体情况调用
         mViewPager.addOnPageChangeListener(this);
         //为viewpager设置adapter
+        mCandyFragment = new CandyFragment();
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(new CandyFragment());
+        pagerAdapter.addFragment(mCandyFragment);
         pagerAdapter.addFragment(new RecommendFragment());
         pagerAdapter.addFragment(new MyInfoFragment());
         mViewPager.setAdapter(pagerAdapter);
@@ -96,6 +98,10 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void onPageScrollStateChanged(int state) {
+    }
+
+    public void refreshCandys() {
+        mCandyFragment.refreshSysData();
     }
 
     private void clickTabOne() {

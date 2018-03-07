@@ -85,7 +85,7 @@ public class DrawCandyActivity extends BaseActivity {
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mWebView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
-
+                view.removeView(mLoadingView);
             }
 
             @Override

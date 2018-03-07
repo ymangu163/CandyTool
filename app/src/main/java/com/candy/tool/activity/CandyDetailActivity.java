@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.bean.CandyBean;
+import com.candy.tool.bean.InviteUrl;
 import com.tool.librecycle.activity.BaseActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,41 +43,34 @@ public class CandyDetailActivity extends BaseActivity {
         CandyBean candyBean = (CandyBean) intent.getSerializableExtra("candy");
         mTitleTv.setText(candyBean.getName());
         mDescriptionTv.setText(candyBean.getDescription());
-        final String candyUrl = candyBean.getUrl();
+        final String candyUrl = getSingleUrl(candyBean);
         mDrawTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(CandyDetailActivity.this, DrawCandyActivity.class);
-                intent.putExtra("url", getUrl(candyUrl));
+                intent.putExtra("url", candyUrl);
                 startActivity(intent);
             }
         });
     }
 
-    private String getUrl(String urlString) {
-        try {
-            String[] urlArray = urlString.split(";");
-            if (urlArray.length > 1) {
-                List<String> urlList = new ArrayList<>();
-                List<Integer> chanceList = new ArrayList<>();
-                int number = new Random().nextInt(10);
-                for (String myurl : urlArray) {
-                    String[] probablility = myurl.split(",");
-                    urlList.add(probablility[0]);
-                    chanceList.add(Integer.valueOf(probablility[1]));
-                }
-                if (number < chanceList.get(0)) {
-                    return urlList.get(0);
-                } else if (number < chanceList.get(0) + chanceList.get(1)) {
-                    return urlList.get(1);
-                } else {
-                    return urlList.get(2);
-                }
-            } else {
-                return urlString;
-            }
-        } catch (NumberFormatException e) {
-            return urlString;
+    private String getSingleUrl(CandyBean candyBean) {
+        if (candyBean == null) {
+            return "";
         }
+        String urlPrefix = candyBean.getUrlPrefix();
+        List<InviteUrl> inviteUrls = candyBean.getInviteUrls();
+        if (inviteUrls == null || inviteUrls.size() == 0) {
+            return urlPrefix;
+        }
+        int number = new Random().nextInt(10);
+        int sum = 0;
+        for (InviteUrl inviteUrl : inviteUrls) {
+            if (number < inviteUrl.getChance() + sum) {
+                return urlPrefix + inviteUrl.getUrlContent();
+            }
+            sum += inviteUrl.getChance();
+        }
+        return urlPrefix;
     }
 }
