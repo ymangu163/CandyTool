@@ -1,9 +1,11 @@
 package com.candy.tool.fragment;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +41,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     private EditText mUrlEdit;
     private EditText mDescriptionEdit;
     private TextView mRewardTv;
+    private Dialog mProgressDialog;
 
     @Nullable
     @Override
@@ -116,6 +119,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 mUrlEdit.setText("");
                 mDescriptionEdit.setText("");
                 mRewardTv.setVisibility(View.VISIBLE);
+                hideProgressDialog();
                 assert getActivity() != null;
                 ((MainActivity) getActivity()).refreshCandys();
             }
@@ -135,12 +139,14 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         int index = ordinalIndexOf(urlString, "/", 3);
         query.addWhereEqualTo("urlPrefix", urlString.substring(0, index));
         final String urlContent = urlString.substring(index);
+        showProgressDialog();
         query.findObjects(new FindListener<CandyBean>() {
 
             @Override
             public void done(List<CandyBean> list, BmobException e) {
                 if (e != null) {
                     ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));
+                    hideProgressDialog();
                     return;
                 }
                 if (list == null || list.size() == 0) {
@@ -187,9 +193,30 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 mUrlEdit.setText("");
                 mDescriptionEdit.setText("");
                 mRewardTv.setVisibility(View.VISIBLE);
+                hideProgressDialog();
 
             }
         });
 
+    }
+
+    private void showProgressDialog() {
+        if (mProgressDialog == null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setCancelable(true);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.layout_dlg_recommend, null);
+            builder.setView(view);
+            mProgressDialog = builder.create();
+            mProgressDialog.setCanceledOnTouchOutside(false);
+        }
+        if (!mProgressDialog.isShowing()) {
+            mProgressDialog.show();
+        }
+    }
+
+    private void hideProgressDialog() {
+        if (mProgressDialog != null && mProgressDialog.isShowing()) {
+            mProgressDialog.dismiss();
+        }
     }
 }

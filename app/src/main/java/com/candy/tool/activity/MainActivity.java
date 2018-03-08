@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.adapter.ViewPagerAdapter;
@@ -17,7 +16,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private ViewPager mViewPager;
     private BottomNavigationView mBottomNavigationView;
-    private TextView mTitle;
     private CandyFragment mCandyFragment;
 
     @Override
@@ -27,7 +25,6 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void initViews() {
-        mTitle = findViewById(R.id.title);
         mBottomNavigationView = findViewById(R.id.bottom_nv);
         mViewPager = findViewById(R.id.main_viewpager);
         initListener();
@@ -107,16 +104,13 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     private void clickTabOne() {
         //为防止隔页切换时,滑过中间页面的问题,去除页面切换缓慢滑动的动画效果
         mViewPager.setCurrentItem(0, false);
-        mTitle.setText("One");
     }
 
     private void clickTabTwo() {
         mViewPager.setCurrentItem(1, false);
-        mTitle.setText("Two");
     }
 
     private void clickTabThree() {
         mViewPager.setCurrentItem(2, false);
-        mTitle.setText("Three");
     }
 }

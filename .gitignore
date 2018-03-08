@@ -11,3 +11,4 @@
 /src/androidTest
 *.apk
 /release
+/candy_key.keystore

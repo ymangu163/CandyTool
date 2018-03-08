@@ -33,4 +33,5 @@ ext {
     minSdkVersion = 19
     targetSdkVersion = 22
     supportLibVersion = "27.0.2"
+    andResGuard7zipVersion = '1.2.10'
 }

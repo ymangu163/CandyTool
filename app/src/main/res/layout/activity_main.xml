@@ -12,17 +12,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:background="#661BB5D7"/>
-
-    <!--标题栏-->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="#1BB5D7"
-        android:gravity="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"/>
+        android:background="#F4B1D1"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_viewpager"

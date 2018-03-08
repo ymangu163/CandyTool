@@ -63,13 +63,20 @@ public class CandyDetailActivity extends BaseActivity {
         if (inviteUrls == null || inviteUrls.size() == 0) {
             return urlPrefix;
         }
+        if (inviteUrls.size() == 1) {
+            return urlPrefix + inviteUrls.get(0).getUrlContent();
+        }
         int number = new Random().nextInt(10);
         int sum = 0;
         for (InviteUrl inviteUrl : inviteUrls) {
             if (number < inviteUrl.getChance() + sum) {
                 return urlPrefix + inviteUrl.getUrlContent();
             }
-            sum += inviteUrl.getChance();
+            if (inviteUrl.getChance() < 0) {
+                return urlPrefix + inviteUrl.getUrlContent();
+            } else {
+                sum += inviteUrl.getChance();
+            }
         }
         return urlPrefix;
     }

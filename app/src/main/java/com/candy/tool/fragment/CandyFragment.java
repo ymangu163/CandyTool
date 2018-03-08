@@ -2,7 +2,6 @@ package com.candy.tool.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +9,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +43,6 @@ public class CandyFragment extends Fragment {
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
     private CandyAdapter mCandyAdapter;
-    private int mCount;
-    private Handler mHandler = new Handler();
     private CommonSharePref mSharePref;
     private int mLimit = 10; // 每页的数据是10条
     private int mCurPage = 0; // 当前页的编号，从0开始
@@ -57,7 +55,7 @@ public class CandyFragment extends Fragment {
         initRefreshLayout();
         initRecyclerView();
         mRefreshLayout.setRefreshing(true);
-        queryData(0, CandyAdapter.REQUEST_REFRESH,true);
+        queryData(0, CandyAdapter.REQUEST_REFRESH, true);
         return rootView;
     }
 
@@ -98,12 +96,21 @@ public class CandyFragment extends Fragment {
 
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
-            String dateNowStr = dateFormat.format(new Date());
-            dateNowStr = dateNowStr.substring(0, 14) + "00:00";
-            try {
-                date = dateFormat.parse(dateNowStr);
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if (useCache
+                    && !TextUtils.isEmpty(mSharePref.getCandyFirstTime())) {
+                String dateNowStr = dateFormat.format(new Date());
+                dateNowStr = dateNowStr.substring(0, 14) + "00:00";
+                try {
+                    date = dateFormat.parse(dateNowStr);
+                    Date date2 = dateFormat.parse(mSharePref.getCandyFirstTime());
+                    if (date.before(date2)) {
+                        date = date2;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                date = new Date();
             }
             query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
         } else {
@@ -139,7 +146,6 @@ public class CandyFragment extends Fragment {
                 if (actionType == CandyAdapter.REQUEST_REFRESH) {
                     // 当是下拉刷新操作时，将当前页的编号重置为0，并把bankCards清空，重新添加
                     mCandyAdapter.clearList();
-                    mCount = 0;
                     mCurPage = 0;
                     // 获取最后时间
                     mSharePref.setCandyFirstTime(list.get(0).getCreatedAt());
@@ -162,7 +168,6 @@ public class CandyFragment extends Fragment {
         mCandyAdapter.notifyDataSetChanged();
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
-
         }
     }
 
