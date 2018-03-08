@@ -29,5 +29,6 @@
     <string name="about_contact_gmail">联系我们：\nblockchaincandymaster@gmail.com</string>
     <string name="recommend_full">该糖果已有多人推荐，您可以推荐其它糖果</string>
     <string name="recommed_msg">正在提交，请稍等&#8230;</string>
+    <string name="load_more_end">见底了，求您别再拉了</string>
 
 </resources>

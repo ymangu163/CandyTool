@@ -18,6 +18,7 @@ import com.candy.tool.activity.CandyDetailActivity;
 import com.candy.tool.adapter.CandyAdapter;
 import com.candy.tool.bean.CandyBean;
 import com.tool.librecycle.utils.CommonSharePref;
+import com.tool.librecycle.utils.ToastUtils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -109,15 +110,15 @@ public class CandyFragment extends Fragment {
             query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
         } else {
 
-            try {
-                date = dateFormat.parse(mSharePref.getCandyLastTime());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            // 只查询小于等于最后一个item发表时间的数据
-            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+//            try {
+//                date = dateFormat.parse(mSharePref.getCandyLastTime());
+//            } catch (ParseException e) {
+//                e.printStackTrace();
+//            }
+//            // 只查询小于等于最后一个item发表时间的数据
+//            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
             // 跳过之前页数并去掉重复数据
-            query.setSkip(page * mLimit + 1);
+            query.setSkip(page * mLimit);
         }
         // 设置每页数据个数
         query.setLimit(mLimit);
@@ -133,8 +134,16 @@ public class CandyFragment extends Fragment {
         query.findObjects(new FindListener<CandyBean>() {
             @Override
             public void done(List<CandyBean> list, BmobException e) {
-                if (e != null || list == null || list.size() == 0) {
+                if (e != null) {
                     refreshStat();
+                    ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));
+                    return;
+                }
+
+                if (actionType == CandyAdapter.REQUEST_LOADMORE
+                        && (list == null || list.size() == 0)) {
+                    refreshStat();
+                    ToastUtils.showToastForShort(getContext(), getString(R.string.load_more_end));
                     return;
                 }
                 if (actionType == CandyAdapter.REQUEST_REFRESH) {
@@ -162,6 +171,8 @@ public class CandyFragment extends Fragment {
         mCandyAdapter.notifyDataSetChanged();
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
+        } else {
+            mCandyAdapter.finishLoad();
         }
     }
 
@@ -173,7 +184,7 @@ public class CandyFragment extends Fragment {
 
     private void initRecyclerView() {
         mCandyAdapter = new CandyAdapter(getActivity());
-        final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mCandyAdapter.setLayoutManager(layoutManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -195,13 +206,16 @@ public class CandyFragment extends Fragment {
                     mCandyAdapter.startLoad();
                     queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE, true);
                 }
+                mLastVisibleItemPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                mLastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+                mLastVisibleItemPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();
             }
+
+
         });
 
         mCandyAdapter.setOnItemClickListener(new CandyAdapter.OnItemClickListener() {

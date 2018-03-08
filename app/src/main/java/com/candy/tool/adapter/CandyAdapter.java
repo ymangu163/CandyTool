@@ -110,6 +110,11 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
+    public void finishLoad() {
+        mIsLoadMore = false;
+        notifyDataSetChanged();
+    }
+
     public interface OnItemClickListener {
         void onItemClick(CandyBean candy);
 
