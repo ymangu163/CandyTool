@@ -2,6 +2,7 @@ package com.candy.tool.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.net.http.SslError;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
@@ -65,6 +66,11 @@ public class DrawCandyActivity extends BaseActivity {
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url.startsWith("https://t.me")) {
+                    Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent1);
+                    return false;
+                }
                 view.loadUrl(url);
                 return true;
             }
@@ -77,14 +83,14 @@ public class DrawCandyActivity extends BaseActivity {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                mLoadingView = View.inflate(DrawCandyActivity.this, R.layout.layout_loading,null);
-                view.addView(mLoadingView, LinearLayout.LayoutParams.MATCH_PARENT , LinearLayout.LayoutParams.MATCH_PARENT);
+                mLoadingView = View.inflate(DrawCandyActivity.this, R.layout.layout_loading, null);
+                view.addView(mLoadingView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                mWebView.setLayerType(View.LAYER_TYPE_HARDWARE,null);
+                mWebView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                 view.removeView(mLoadingView);
             }
 

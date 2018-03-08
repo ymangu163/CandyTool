@@ -9,7 +9,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -96,16 +95,11 @@ public class CandyFragment extends Fragment {
 
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
-            if (useCache
-                    && !TextUtils.isEmpty(mSharePref.getCandyFirstTime())) {
+            if (useCache) {
                 String dateNowStr = dateFormat.format(new Date());
-                dateNowStr = dateNowStr.substring(0, 14) + "00:00";
+                dateNowStr = dateNowStr.substring(0, 17) + "00";
                 try {
                     date = dateFormat.parse(dateNowStr);
-                    Date date2 = dateFormat.parse(mSharePref.getCandyFirstTime());
-                    if (date.before(date2)) {
-                        date = date2;
-                    }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
