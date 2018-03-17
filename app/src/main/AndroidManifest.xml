@@ -53,9 +53,18 @@
             android:name=".activity.RewardActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activity.PrivacyPolicyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" />
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="ee5e69c18ef209ed400c116c2af3db5f1ee4db21" />
+
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="wangdoujia" />
     </application>
 
 </manifest>

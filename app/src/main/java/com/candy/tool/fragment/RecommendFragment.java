@@ -96,7 +96,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     }
 
     private void saveRecommend(String coinName, String urlString, String desString) {
-        int index = ordinalIndexOf(urlString, "/", 3);
+        int index = getUrlPrefixIndex(urlString);
         CandyBean candyBean = new CandyBean();
         candyBean.setName(coinName);
         candyBean.setDescription(desString);
@@ -112,6 +112,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             public void done(String objectId, BmobException exception) {
                 if (exception != null) {
                     ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));
+                    hideProgressDialog();
                     return;
                 }
                 ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_success));
@@ -126,6 +127,13 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         });
     }
 
+    private int getUrlPrefixIndex(String urlString) {
+        if (urlString.startsWith("https://goo.gl")) {
+            return ordinalIndexOf(urlString, "/", 4);
+        }
+        return ordinalIndexOf(urlString, "/", 3);
+    }
+
     private int ordinalIndexOf(String str, String substr, int n) {
         int pos = str.indexOf(substr);
         while (--n > 0 && pos != -1) {
@@ -136,7 +144,10 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
 
     private void checkDatabase(final String coinName, final String urlString, final String desString) {
         BmobQuery<CandyBean> query = new BmobQuery<>();
-        int index = ordinalIndexOf(urlString, "/", 3);
+        int index = getUrlPrefixIndex(urlString);
+        if (index < 0) {
+            index = urlString.length();
+        }
         query.addWhereEqualTo("urlPrefix", urlString.substring(0, index));
         final String urlContent = urlString.substring(index);
         showProgressDialog();
@@ -163,13 +174,16 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     }
 
     private void updateRecommend(CandyBean candyBean, String coinName, String urlContent, String desString) {
-        if (!candyBean.isCanRecommend()) {
+        if (!candyBean.isCanRecommend()
+                || TextUtils.isEmpty(urlContent)) {
             ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_full));
+            hideProgressDialog();
             return;
         }
         List<InviteUrl> inviteUrls = candyBean.getInviteUrls();
-        if (inviteUrls.size() >= 2) {
+        if (inviteUrls == null || inviteUrls.size() >= 2) {
             ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_full));
+            hideProgressDialog();
             return;
         }
 
@@ -186,6 +200,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
             public void done(BmobException e) {
                 if (e != null) {
                     ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));
+                    hideProgressDialog();
                     return;
                 }
                 ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_success));

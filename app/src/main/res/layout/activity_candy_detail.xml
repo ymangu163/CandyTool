@@ -1,47 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20dp"
-    >
+    android:padding="20dp">
+
     <TextView
         android:id="@+id/detail_title_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/black"
         android:layout_marginTop="40dp"
         android:gravity="center_horizontal"
-        android:textStyle="bold"
-        />
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/detail_description_tv"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:layout_marginBottom="90dp"
         android:layout_marginTop="30dp"
-        android:minHeight="100dp"
-        android:maxHeight="600dp"
-        android:ellipsize="end"
-        />
+        android:layout_marginBottom="80dp"
+        >
+        <TextView
+            android:id="@+id/detail_description_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </ScrollView>
 
     <TextView
         android:id="@+id/detail_draw_tv"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:text="领   取"
-        android:gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/white"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/selector_recommend"
         android:layout_marginBottom="80dp"
-        />
+        android:background="@drawable/selector_recommend"
+        android:gravity="center"
+        android:text="@string/candy_get"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
 </LinearLayout>

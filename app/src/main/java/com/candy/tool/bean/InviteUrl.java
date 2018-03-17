@@ -1,6 +1,6 @@
 package com.candy.tool.bean;
 
-import java.io.Serializable;
+import cn.bmob.v3.BmobObject;
 
 /**
  * File description
@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @date 2018/3/6
  */
 
-public class InviteUrl implements Serializable {
+public class InviteUrl extends BmobObject {
     private String urlContent;
     private int chance;
 

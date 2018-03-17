@@ -26,19 +26,19 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 20180308
+        versionCode 20180313
         versionName "1.0.0"
     }
 
     signingConfigs {
         debug {
-            storeFile file("./../candy_key.keystore")
+            storeFile file("./../candy.jks")
             storePassword 'Cdnal36ntedr'
             keyAlias 'candy'
             keyPassword 'Cdnal36ntedr'
         }
         release {
-            storeFile file("./../candy_key.keystore")
+            storeFile file("./../candy.jks")
             storePassword 'Cdnal36ntedr'
             keyAlias 'candy'
             keyPassword 'Cdnal36ntedr'
@@ -79,7 +79,7 @@ dependencies {
 andResGuard {
     // mappingFile = file("./resource_mapping.txt")
     mappingFile = null
-    use7zip = true
+    use7zip = false
     useSign = true
     // it will keep the origin path of your resources when it's true
     keepRoot = false
@@ -103,8 +103,7 @@ andResGuard {
             "*.png",
             "*.jpg",
             "*.jpeg",
-            "*.gif",
-            "resources.arsc"
+            "*.gif"
     ]
     sevenzip {
         artifact = "com.tencent.mm:SevenZip:$rootProject.ext.andResGuard7zipVersion"

@@ -110,13 +110,6 @@ public class CandyFragment extends Fragment {
             query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
         } else {
 
-//            try {
-//                date = dateFormat.parse(mSharePref.getCandyLastTime());
-//            } catch (ParseException e) {
-//                e.printStackTrace();
-//            }
-//            // 只查询小于等于最后一个item发表时间的数据
-//            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
             // 跳过之前页数并去掉重复数据
             query.setSkip(page * mLimit);
         }
@@ -136,7 +129,7 @@ public class CandyFragment extends Fragment {
             public void done(List<CandyBean> list, BmobException e) {
                 if (e != null) {
                     refreshStat();
-                    ToastUtils.showToastForShort(getContext(), getString(R.string.recommend_fail));
+                    ToastUtils.showToastForShort(getContext(), getString(R.string.candy_fail));
                     return;
                 }
 

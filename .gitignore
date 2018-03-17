@@ -12,3 +12,4 @@
 *.apk
 /release
 /candy_key.keystore
+/candy.jks

@@ -1,34 +1,36 @@
 <resources>
     <string name="app_name">Candy Master</string>
     <string name="bomb_key">ba902d8002bec5b59362195068e278c7</string>
-    <string name="tab_one">糖 果</string>
-    <string name="tab_two">推 荐</string>
-    <string name="tab_three">我 的</string>
-    <string name="coin_name">糖果名称：</string>
-    <string name="coin">币</string>
-    <string name="hint_input_coin_name">请输入糖果名称</string>
-    <string name="coin_name_length">糖果名称应为2~8个字符</string>
-    <string name="invite_url">邀请链接：</string>
-    <string name="hint_input_url">请输入您的邀请链接</string>
-    <string name="coin_description">糖果描述：</string>
-    <string name="hint_input_description">糖果描述至少10个字</string>
-    <string name="recommend_submit">推 荐</string>
-    <string name="recommend_success">恭喜您，推荐成功</string>
-    <string name="recommend_fail">推荐失败，请稍后重试</string>
-    <string name="loading">正在加载，请稍等&#8230;</string>
-    <string name="url_format">邀请链接必须以http://或者https://开头</string>
+    <string name="tab_one">Candy</string>
+    <string name="tab_two">Recommend</string>
+    <string name="tab_three">My</string>
+    <string name="coin_name">Candy Name:</string>
+    <string name="coin">coin</string>
+    <string name="hint_input_coin_name">Please enter the name of the candy.</string>
+    <string name="coin_name_length">The candy name should be 2~8 characters.</string>
+    <string name="invite_url">Invite Link:</string>
+    <string name="hint_input_url">Please enter your invitation link.</string>
+    <string name="coin_description">Candy description:</string>
+    <string name="hint_input_description">Candy describes at least 10 words.</string>
+    <string name="recommend_submit">Recommend</string>
+    <string name="recommend_success">Congratulations, recommend success</string>
+    <string name="recommend_fail">Recommendation failed, please try again later.</string>
+    <string name="candy_fail">The data failed, please try again later.</string>
+    <string name="loading">Loading, please wait a moment&#8230;</string>
+    <string name="url_format">Invitation links must be http:// or https://.</string>
 
-    <string name="my_recommend">我的推荐</string>
-    <string name="my_recommend_state">关于推荐</string>
-    <string name="my_about">关于我们</string>
-    <string name="about_recommend_goal">&#160;&#160;&#160;&#160;&#160;&#160;糖果是区块链带给普通人的一大福利，为了让这个生态健康发展，应用中提供了推荐接口，让更多的用户参与进来。每种糖果会收录前3个邀请链接，并按照一定的比率分发给领取糖果的用户。</string>
-    <string name="about_recommend_reward">&#160;&#160;&#160;&#160;&#160;&#160;为了营造一个纯净的生态，应用中没有加入付费和广告等营利模式，完全免费。\n您可以以打赏的方式来支持开发者，以购买更加稳定的服务器。</string>
-    <string name="reward">赏</string>
+    <string name="my_recommend">My Recommendation</string>
+    <string name="my_recommend_state">About Recommendation</string>
+    <string name="my_about">About us</string>
+    <string name="about_recommend_goal">&#160;&#160;&#160;&#160;&#160;&#160;Candy is a big benefit to ordinary people in the block chain. In order to make this ecological healthy development, the recommended interface is provided in the application, so that more users can participate in it. Each candy will include the first three invitations and distribute it to the recipients at a certain rate.</string>
+    <string name="about_recommend_reward">&#160;&#160;&#160;&#160;&#160;&#160;In order to create a pure ecology, there is no such profit-making model as paid-in and advertising, which is completely free. \n you can support developers in a rewarding way to buy more stable servers.</string>
+    <string name="reward">reward</string>
 
     <string name="about_copyright">Candy Master©2018</string>
-    <string name="about_contact_gmail">联系我们：\nblockchaincandymaster@gmail.com</string>
-    <string name="recommend_full">该糖果已有多人推荐，您可以推荐其它糖果</string>
-    <string name="recommed_msg">正在提交，请稍等&#8230;</string>
-    <string name="load_more_end">见底了，求您别再拉了</string>
-
+    <string name="about_contact_gmail">Contact us：\nblockchaincandymaster@gmail.com</string>
+    <string name="recommend_full">The candy has been recommended by many people and you can recommend other candies.</string>
+    <string name="recommed_msg">Just a moment, please.&#8230;</string>
+    <string name="load_more_end">See the bottom, please don\'t pull any more.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="candy_get">pick</string>
 </resources>
