@@ -49,17 +49,19 @@ public class DrawCandyActivity extends BaseActivity {
         WebSettings settings = mWebView.getSettings();
 
         mWebView.requestFocus();
-        settings.setJavaScriptEnabled(true);
         settings.setAppCacheEnabled(true);
-        settings.setSupportZoom(true);
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        settings.setJavaScriptEnabled(true);
+        settings.setSupportZoom(true);
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
 
         mWebView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         mWebView.loadUrl(candyUrl);
-//        mWebView.loadUrl("https://www.baidu.com");
+//        mWebView.loadUrl("http://www.ypx-6.com");
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
