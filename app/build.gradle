@@ -26,8 +26,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 20180313
-        versionName "1.0.0"
+        versionCode 20180319
+        versionName "1.1.2"
     }
 
     signingConfigs {

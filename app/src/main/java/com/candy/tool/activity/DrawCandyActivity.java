@@ -3,10 +3,8 @@ package com.candy.tool.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.net.http.SslError;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
-import android.webkit.SslErrorHandler;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -75,10 +73,6 @@ public class DrawCandyActivity extends BaseActivity {
                 return true;
             }
 
-            @Override
-            public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-                handler.proceed();
-            }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
