@@ -41,6 +41,9 @@ public class CandyDetailActivity extends BaseActivity {
     public void initData() {
         Intent intent = getIntent();
         CandyBean candyBean = (CandyBean) intent.getSerializableExtra("candy");
+        if (candyBean == null) {
+            return;
+        }
         mTitleTv.setText(candyBean.getName());
         mDescriptionTv.setText(candyBean.getDescription());
         final String candyUrl = getSingleUrl(candyBean);

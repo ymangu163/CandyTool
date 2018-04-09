@@ -28,7 +28,6 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/reward_wechat"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             />
@@ -52,7 +51,6 @@
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/reward_imtoken"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             />

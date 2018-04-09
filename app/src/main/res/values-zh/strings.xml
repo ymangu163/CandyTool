@@ -23,7 +23,7 @@
     <string name="my_recommend_state">关于推荐</string>
     <string name="my_about">关于我们</string>
     <string name="about_recommend_goal">&#160;&#160;&#160;&#160;&#160;&#160;糖果是区块链带给普通人的一大福利，为了让这个生态健康发展，应用中提供了推荐接口，让更多的用户参与进来。每种糖果会收录前3个邀请链接，并按照一定的比率分发给领取糖果的用户。</string>
-    <string name="about_recommend_reward">&#160;&#160;&#160;&#160;&#160;&#160;为了营造一个纯净的生态，应用中没有加入付费和广告等营利模式，完全免费。\n您可以以打赏的方式来支持开发者，以购买更加稳定的服务器。</string>
+    <string name="about_recommend_reward">&#160;&#160;&#160;&#160;&#160;&#160;为了营造一个纯净的生态，应用中没有加入付费和广告等营利模式，完全免费。\n</string>
     <string name="reward">赏</string>
 
     <string name="about_copyright">Candy Master©2018</string>

@@ -67,3 +67,9 @@
 -keep class com.android.internal.http.multipart.**{*;}
 -keep class org.apache.commons.**{*;}
 -keep class org.apache.http.**{*;}
+
+# Crashlytics
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
+-keepattributes SourceFile,LineNumberTable,*Annotation*
+-keep class com.crashlytics.android.**

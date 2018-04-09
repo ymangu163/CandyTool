@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -40,7 +41,9 @@ public class DrawCandyActivity extends BaseActivity {
     public void initData() {
         Intent intent = getIntent();
         String candyUrl = intent.getStringExtra("url");
-
+        if (TextUtils.isEmpty(candyUrl)) {
+            return;
+        }
         if (!candyUrl.startsWith("http://") && !candyUrl.startsWith("https://")) {
             candyUrl = "http://" + candyUrl;
         }
@@ -61,7 +64,7 @@ public class DrawCandyActivity extends BaseActivity {
 
         mWebView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         mWebView.loadUrl(candyUrl);
-//        mWebView.loadUrl("http://www.ypx-6.com");
+//        mWebView.loadUrl("https://beta.ivery.one/I/2105967");
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override

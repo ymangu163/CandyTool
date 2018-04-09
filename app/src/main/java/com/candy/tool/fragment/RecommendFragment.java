@@ -1,7 +1,6 @@
 package com.candy.tool.fragment;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -15,7 +14,6 @@ import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
-import com.candy.tool.activity.RewardActivity;
 import com.candy.tool.bean.CandyBean;
 import com.candy.tool.bean.InviteUrl;
 import com.tool.librecycle.utils.ToastUtils;
@@ -52,7 +50,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mDescriptionEdit = rootView.findViewById(R.id.coin_description_et);
         mRewardTv = rootView.findViewById(R.id.recommend_reward_tv);
         rootView.findViewById(R.id.coin_recommend_tv).setOnClickListener(this);
-        mRewardTv.setOnClickListener(this);
 
         return rootView;
     }
@@ -62,9 +59,10 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         int vId = view.getId();
         if (vId == R.id.coin_recommend_tv) {
             submit();
-        } else if (vId == R.id.recommend_reward_tv) {
-            startActivity(new Intent(getActivity(), RewardActivity.class));
         }
+//        else if (vId == R.id.recommend_reward_tv) {
+//            startActivity(new Intent(getActivity(), RewardActivity.class));
+//        }
 
     }
 
@@ -119,7 +117,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 mNameEdit.setText("");
                 mUrlEdit.setText("");
                 mDescriptionEdit.setText("");
-                mRewardTv.setVisibility(View.VISIBLE);
+//                mRewardTv.setVisibility(View.VISIBLE);
                 hideProgressDialog();
                 assert getActivity() != null;
                 ((MainActivity) getActivity()).refreshCandys();

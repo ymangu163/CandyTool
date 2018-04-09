@@ -1,8 +1,5 @@
 package com.candy.tool.activity;
 
-import android.content.Intent;
-import android.view.View;
-
 import com.candy.tool.R;
 import com.tool.librecycle.activity.BaseActivity;
 
@@ -21,12 +18,7 @@ public class AboutRecommendActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-        findViewById(R.id.about_reward_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(AboutRecommendActivity.this, RewardActivity.class));
-            }
-        });
+
     }
 
     @Override

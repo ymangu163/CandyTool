@@ -21,13 +21,15 @@ repositories {
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+
+    def verCode = Integer.parseInt(new Date().format("yyyyMMdd"))
     defaultConfig {
         applicationId "com.candy.tool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 20180319
-        versionName "1.1.2"
+        versionCode verCode
+        versionName "1.1.3"
     }
 
     signingConfigs {
