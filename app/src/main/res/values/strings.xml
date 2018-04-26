@@ -33,4 +33,5 @@
     <string name="load_more_end">See the bottom, please don\'t pull any more.</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="candy_get">pick</string>
+    <string name="about_us_check_for_update">Check for Updates</string>
 </resources>

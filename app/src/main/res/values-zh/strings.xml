@@ -33,5 +33,5 @@
     <string name="load_more_end">见底了，求您别再拉了</string>
     <string name="privacy_policy">隐私协议</string>
     <string name="candy_get">领 取</string>
-
+    <string name="about_us_check_for_update">检测升级</string>
 </resources>

@@ -3,15 +3,21 @@ package com.candy.tool.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.candy.tool.R;
+import com.candy.tool.utils.GlobalData;
 import com.tool.librecycle.activity.BaseActivity;
 
 /**
@@ -21,7 +27,7 @@ import com.tool.librecycle.activity.BaseActivity;
  * @date 2018/3/5
  */
 
-public class DrawCandyActivity extends BaseActivity {
+public class DrawCandyActivity extends BaseActivity implements View.OnClickListener {
 
     private WebView mWebView;
     private View mLoadingView;
@@ -34,7 +40,7 @@ public class DrawCandyActivity extends BaseActivity {
     @Override
     public void initViews() {
         mWebView = findViewById(R.id.draw_webview);
-//        mWebView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        findViewById(R.id.draw_back_iv).setOnClickListener(this);
     }
 
     @Override
@@ -61,18 +67,32 @@ public class DrawCandyActivity extends BaseActivity {
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
+        settings.setDomStorageEnabled(true);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+
 
         mWebView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
+        if (isInterceptUrl(candyUrl)) {
+            Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(candyUrl));
+            startActivity(intent1);
+            finish();
+            return;
+        }
         mWebView.loadUrl(candyUrl);
+//        mWebView.loadDataWithBaseURL(null, candyUrl, "text/html", "UTF-8", null);
 //        mWebView.loadUrl("https://beta.ivery.one/I/2105967");
+
+        mWebView.setWebChromeClient(new WebChromeClient());
 
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                if (url.startsWith("https://t.me")) {
+                if (isInterceptUrl(url)) {
                     Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent1);
-                    return false;
+                    return true;
                 }
                 view.loadUrl(url);
                 return true;
@@ -98,7 +118,50 @@ public class DrawCandyActivity extends BaseActivity {
                 super.onPageCommitVisible(view, url);
                 view.removeView(mLoadingView);
             }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                if (Build.VERSION.SDK_INT >= 21) {
+                    Log.e("gao", request.getUrl().toString());
+                }
+            }
         });
 
+    }
+
+    private boolean isInterceptUrl(String url) {
+        if (url.contains("download")
+                || url.contains(".apk")) {
+            return true;
+        }
+        String subUrl = url.substring(8);
+        int index = subUrl.indexOf("/");
+        if (!(index < 0)) {
+            subUrl = subUrl.substring(0, index);
+        }
+        if (GlobalData.getMaskUrl().contains(subUrl)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (mWebView.canGoBack()) {
+            mWebView.goBack();
+            return;
+        }
+
+        super.onBackPressed();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int vId = v.getId();
+        if (vId == R.id.draw_back_iv) {
+            finish();
+        }
     }
 }

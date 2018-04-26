@@ -16,4 +16,6 @@
     <color name="reward">#EA4D8F</color>
     <color name="reward_80">#CCEA4D8F</color>
     <color name="divider">#D8D8D8</color>
+
+    <color name="color_gray_light">#e6e6e6</color>
 </resources>
