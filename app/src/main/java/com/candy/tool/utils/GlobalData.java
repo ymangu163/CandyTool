@@ -9,13 +9,4 @@ package com.candy.tool.utils;
 
 public class GlobalData {
 
-    private static String sMaskUrl = "";
-
-    public static String getMaskUrl() {
-        return sMaskUrl;
-    }
-
-    public static void setMaskUrl(String maskUrl) {
-        sMaskUrl = maskUrl;
-    }
 }

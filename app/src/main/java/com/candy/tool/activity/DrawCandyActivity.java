@@ -17,8 +17,8 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.candy.tool.R;
-import com.candy.tool.utils.GlobalData;
 import com.tool.librecycle.activity.BaseActivity;
+import com.tool.librecycle.utils.CommonSharePref;
 
 /**
  * File description
@@ -140,7 +140,7 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
         if (!(index < 0)) {
             subUrl = subUrl.substring(0, index);
         }
-        if (GlobalData.getMaskUrl().contains(subUrl)) {
+        if (CommonSharePref.getInstance(this).getMaskUrlContent().contains(subUrl)) {
             return true;
         }
         return false;
