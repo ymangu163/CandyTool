@@ -137,6 +137,9 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
         }
         String subUrl = url.substring(8);
         int index = subUrl.indexOf("/");
+        if (index < 0) {
+            index = subUrl.indexOf("?");
+        }
         if (!(index < 0)) {
             subUrl = subUrl.substring(0, index);
         }

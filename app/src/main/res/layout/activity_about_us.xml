@@ -4,15 +4,19 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <LinearLayout
         android:id="@+id/about_top_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:paddingTop="100dp"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        >
 
         <ImageView
             android:layout_width="72dp"
@@ -66,7 +70,7 @@
             android:textColor="@color/black_80"
             android:background="@drawable/selector_setting_item"
             android:gravity="center"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
     </LinearLayout>
 
@@ -76,17 +80,21 @@
         android:text="@string/about_contact_gmail"
         android:textColor="@color/black_80"
         android:textSize="18sp"
-        android:layout_margin="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/white"
         />
 
     <TextView
         android:id="@+id/about_authority_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:paddingBottom="10dp"
         android:gravity="center_horizontal"
         android:text="@string/about_copyright"
         android:textColor="#c0000000"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:background="@color/white"
+        />
 
 </LinearLayout>

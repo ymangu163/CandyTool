@@ -17,8 +17,8 @@ public class CommonSharePref {
 
     private final String KEY_CANDY_FIRST_TIME = "key_candy_first_time";
     private final String KEY_CANDY_LAST_TIME = "key_candy_last_time";
-
-
+    private final String KEY_MARK_URL_TIME = "key_mark_url_time";
+    private final String KEY_MASK_URL_CONTENT = "key_mask_url_content";
 
     /************************结束定义 KEY*****************************/
 
@@ -93,4 +93,19 @@ public class CommonSharePref {
         return getString(KEY_CANDY_LAST_TIME);
     }
 
+    public long getMaskUrlTime() {
+        return getLong(KEY_MARK_URL_TIME, 0);
+    }
+
+    public void setMaskUrlTime(long value) {
+        putLong(KEY_MARK_URL_TIME, value);
+    }
+
+    public String getMaskUrlContent() {
+        return getString(KEY_MASK_URL_CONTENT);
+    }
+
+    public void setMaskUrlContent(String value) {
+         putString(KEY_MASK_URL_CONTENT, value);
+    }
 }

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
@@ -38,7 +37,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     private EditText mNameEdit;
     private EditText mUrlEdit;
     private EditText mDescriptionEdit;
-    private TextView mRewardTv;
     private Dialog mProgressDialog;
 
     @Nullable
@@ -48,7 +46,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mNameEdit = rootView.findViewById(R.id.coin_name_et);
         mUrlEdit = rootView.findViewById(R.id.coin_url_et);
         mDescriptionEdit = rootView.findViewById(R.id.coin_description_et);
-        mRewardTv = rootView.findViewById(R.id.recommend_reward_tv);
         rootView.findViewById(R.id.coin_recommend_tv).setOnClickListener(this);
 
         return rootView;
@@ -60,10 +57,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         if (vId == R.id.coin_recommend_tv) {
             submit();
         }
-//        else if (vId == R.id.recommend_reward_tv) {
-//            startActivity(new Intent(getActivity(), RewardActivity.class));
-//        }
-
     }
 
     private void submit() {
@@ -117,7 +110,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 mNameEdit.setText("");
                 mUrlEdit.setText("");
                 mDescriptionEdit.setText("");
-//                mRewardTv.setVisibility(View.VISIBLE);
                 hideProgressDialog();
                 assert getActivity() != null;
                 ((MainActivity) getActivity()).refreshCandys();
@@ -126,10 +118,19 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     }
 
     private int getUrlPrefixIndex(String urlString) {
+        int index = -1;
         if (urlString.startsWith("https://goo.gl")) {
-            return ordinalIndexOf(urlString, "/", 4);
+            index = ordinalIndexOf(urlString, "/", 4);
+            if (index < 0) {
+                index = urlString.indexOf("?");
+            }
+            return index;
         }
-        return ordinalIndexOf(urlString, "/", 3);
+        index = ordinalIndexOf(urlString, "/", 3);
+        if (index < 0) {
+            index = urlString.indexOf("?");
+        }
+        return index;
     }
 
     private int ordinalIndexOf(String str, String substr, int n) {
@@ -205,7 +206,6 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
                 mNameEdit.setText("");
                 mUrlEdit.setText("");
                 mDescriptionEdit.setText("");
-                mRewardTv.setVisibility(View.VISIBLE);
                 hideProgressDialog();
 
             }
