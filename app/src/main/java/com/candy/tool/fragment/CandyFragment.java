@@ -17,6 +17,7 @@ import com.candy.tool.R;
 import com.candy.tool.activity.CandyDetailActivity;
 import com.candy.tool.adapter.CandyAdapter;
 import com.candy.tool.bean.CandyBean;
+import com.candy.tool.utils.GsonUtil;
 import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
@@ -54,8 +55,7 @@ public class CandyFragment extends Fragment {
         mRecyclerView = rootView.findViewById(R.id.candy_recycler);
         initRefreshLayout();
         initRecyclerView();
-        mRefreshLayout.setRefreshing(true);
-        queryData(0, CandyAdapter.REQUEST_REFRESH, true);
+        initData();
         return rootView;
     }
 
@@ -64,6 +64,21 @@ public class CandyFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSharePref = CommonSharePref.getInstance(getContext());
+    }
+
+    private void initData() {
+        String candyString = mSharePref.getRefreshResult();
+        List<CandyBean> list = GsonUtil.gson2List(candyString, CandyBean.class);
+        if (list == null || list.isEmpty()) {
+            queryData(0, CandyAdapter.REQUEST_REFRESH, true);
+            return;
+        }
+        mCandyAdapter.clearList();
+        // 将本次查询的数据添加到bankCards中
+        mCandyAdapter.addList(list);
+        // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
+        mCurPage++;
+        mCandyAdapter.notifyDataSetChanged();
     }
 
     private void initRefreshLayout() {
@@ -145,6 +160,7 @@ public class CandyFragment extends Fragment {
                     mCurPage = 0;
                     // 获取最后时间
                     mSharePref.setCandyFirstTime(list.get(0).getCreatedAt());
+                    mSharePref.setRefreshResult(GsonUtil.getGsonString(list));
                 }
 
                 // 将本次查询的数据添加到bankCards中
