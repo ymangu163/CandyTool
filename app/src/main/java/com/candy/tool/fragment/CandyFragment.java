@@ -47,6 +47,8 @@ public class CandyFragment extends Fragment {
     private CommonSharePref mSharePref;
     private int mLimit = 10; // 每页的数据是10条
     private int mCurPage = 0; // 当前页的编号，从0开始
+    private boolean mLoadedAll;
+    private int mLastPage;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,6 +72,7 @@ public class CandyFragment extends Fragment {
         String candyString = mSharePref.getRefreshResult();
         List<CandyBean> list = GsonUtil.gson2List(candyString, CandyBean.class);
         if (list == null || list.isEmpty()) {
+            mRefreshLayout.setRefreshing(true);
             queryData(0, CandyAdapter.REQUEST_REFRESH, true);
             return;
         }
@@ -111,6 +114,7 @@ public class CandyFragment extends Fragment {
 
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
+            mLoadedAll = false;
             if (useCache) {
                 String dateNowStr = dateFormat.format(new Date());
                 dateNowStr = dateNowStr.substring(0, 17) + "00";
@@ -124,9 +128,13 @@ public class CandyFragment extends Fragment {
             }
             query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
         } else {
-
+            if (page == mLastPage) {
+                return;
+            }
             // 跳过之前页数并去掉重复数据
             query.setSkip(page * mLimit);
+//            Log.e("gao", "skip :" + (page * mLimit) + "  currentPage:" + mCurPage);
+            mLastPage = page;
         }
         // 设置每页数据个数
         query.setLimit(mLimit);
@@ -152,6 +160,7 @@ public class CandyFragment extends Fragment {
                         && (list == null || list.size() == 0)) {
                     refreshStat();
                     ToastUtils.showToastForShort(getContext(), getString(R.string.load_more_end));
+                    mLoadedAll = true;
                     return;
                 }
                 if (actionType == CandyAdapter.REQUEST_REFRESH) {
@@ -206,9 +215,14 @@ public class CandyFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
-                        && mLastVisibleItemPosition == mCandyAdapter.getItemCount() - 1) {
+                        && mLastVisibleItemPosition >= mCandyAdapter.getItemCount() - 3) {
                     if (mRefreshLayout.isRefreshing()) {
                         mCandyAdapter.notifyItemRemoved(mCandyAdapter.getItemCount());
+                        return;
+                    }
+
+                    if (mLoadedAll) {
+                        ToastUtils.showToastForShort(getContext(), getString(R.string.candy_fail));
                         return;
                     }
 

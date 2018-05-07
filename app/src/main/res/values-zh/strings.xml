@@ -34,4 +34,5 @@
     <string name="privacy_policy">隐私协议</string>
     <string name="candy_get">领 取</string>
     <string name="about_us_check_for_update">检测升级</string>
+    <string name="url_error">链接错误！</string>
 </resources>

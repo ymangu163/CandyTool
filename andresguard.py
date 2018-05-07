@@ -10,5 +10,5 @@ def deleteLastApks():
         shutil.rmtree(apk_path, ignore_errors=True)
 
 deleteLastApks()
-cmd_resguard = r'/Users/all/AndroidStudioProjects/CandyTool/gradlew resguardRelease'
+cmd_resguard = r'/Users/all/AndroidStudioProjects/CandyTool/gradlew assembleRelease'
 os.system(cmd_resguard)

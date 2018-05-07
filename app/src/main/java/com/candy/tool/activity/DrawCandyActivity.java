@@ -17,8 +17,10 @@ import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import com.candy.tool.R;
+import com.crashlytics.android.Crashlytics;
 import com.tool.librecycle.activity.BaseActivity;
 import com.tool.librecycle.utils.CommonSharePref;
+import com.tool.librecycle.utils.ToastUtils;
 
 /**
  * File description
@@ -76,7 +78,12 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
         mWebView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
         if (isInterceptUrl(candyUrl)) {
             Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(candyUrl));
-            startActivity(intent1);
+            try {
+                startActivity(intent1);
+            } catch (Exception e) {
+                Crashlytics.logException(e);
+                ToastUtils.showToastForShort(this, getString(R.string.url_error));
+            }
             finish();
             return;
         }
@@ -91,7 +98,12 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (isInterceptUrl(url)) {
                     Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                    startActivity(intent1);
+                    try {
+                        startActivity(intent1);
+                    } catch (Exception e) {
+                        Crashlytics.logException(e);
+                        ToastUtils.showToastForShort(DrawCandyActivity.this, getString(R.string.url_error));
+                    }
                     return true;
                 }
                 view.loadUrl(url);
@@ -133,6 +145,9 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
     private boolean isInterceptUrl(String url) {
         if (url.contains("download")
                 || url.contains(".apk")) {
+            return true;
+        }
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
             return true;
         }
         String subUrl = url.substring(8);

@@ -99,6 +99,7 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void addList(List<CandyBean> data) {
         mListData.addAll(data);
+//        Log.e("gao", "data size = " + mListData.size());
     }
 
     public void clearList() {
