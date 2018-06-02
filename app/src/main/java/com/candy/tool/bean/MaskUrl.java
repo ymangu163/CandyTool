@@ -11,6 +11,7 @@ import cn.bmob.v3.BmobObject;
 
 public class MaskUrl extends BmobObject {
     private String maskurl;
+    private String recommendPreUrl;
 
     public String getMaskurl() {
         return maskurl;
@@ -18,5 +19,9 @@ public class MaskUrl extends BmobObject {
 
     public void setMaskurl(String maskurl) {
         this.maskurl = maskurl;
+    }
+
+    public String getRecommendPreUrl() {
+        return recommendPreUrl;
     }
 }

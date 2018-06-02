@@ -20,6 +20,7 @@ public class CommonSharePref {
     private final String KEY_MARK_URL_TIME = "key_mark_url_time";
     private final String KEY_MASK_URL_CONTENT = "key_mask_url_content";
     private final String KEY_REFRESH_RESULT = "key_refresh_result";
+    private final String KEY_RECOMMEND_PREURL = "key_recommend_preurl";
 
     /************************结束定义 KEY*****************************/
 
@@ -116,5 +117,13 @@ public class CommonSharePref {
 
     public void setRefreshResult(String value) {
          putString(KEY_REFRESH_RESULT, value);
+    }
+
+    public String getRecommendPreUrl() {
+        return getString(KEY_RECOMMEND_PREURL);
+    }
+
+    public void setRecommendPreUrl(String value) {
+        putString(KEY_RECOMMEND_PREURL, value);
     }
 }

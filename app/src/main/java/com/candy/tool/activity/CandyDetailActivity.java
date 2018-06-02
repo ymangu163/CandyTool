@@ -99,7 +99,7 @@ public class CandyDetailActivity extends BaseActivity {
             return;
         }
         BmobQuery<MaskUrl> query = new BmobQuery<MaskUrl>();
-        query.addQueryKeys("maskurl");
+        query.addQueryKeys("maskurl,recommendPreUrl");
 
         query.getObject("2246bc5f5d", new QueryListener<MaskUrl>() {
 
@@ -108,6 +108,7 @@ public class CandyDetailActivity extends BaseActivity {
                 if (e != null) {
                     return;
                 }
+                sharePref.setRecommendPreUrl(object.getRecommendPreUrl());
                 sharePref.setMaskUrlContent(object.getMaskurl());
                 sharePref.setMaskUrlTime(System.currentTimeMillis());
             }

@@ -2,6 +2,8 @@ package com.candy.tool.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -49,6 +51,14 @@ public class CandyFragment extends Fragment {
     private int mCurPage = 0; // 当前页的编号，从0开始
     private boolean mLoadedAll;
     private int mLastPage;
+
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            refreshStat();
+            return false;
+        }
+    });
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -107,7 +117,7 @@ public class CandyFragment extends Fragment {
 
     private void queryData(int page, final int actionType, boolean useCache) {
         BmobQuery<CandyBean> query = new BmobQuery<>();
-        query.order("-createdAt");
+        query.order("-updatedAt");
         // 处理时间查询
         Date date = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
@@ -126,14 +136,13 @@ public class CandyFragment extends Fragment {
             } else {
                 date = new Date();
             }
-            query.addWhereLessThanOrEqualTo("createdAt", new BmobDate(date));
+            query.addWhereLessThanOrEqualTo("updatedAt", new BmobDate(date));
         } else {
             if (page == mLastPage) {
                 return;
             }
             // 跳过之前页数并去掉重复数据
             query.setSkip(page * mLimit);
-//            Log.e("gao", "skip :" + (page * mLimit) + "  currentPage:" + mCurPage);
             mLastPage = page;
         }
         // 设置每页数据个数
@@ -146,6 +155,9 @@ public class CandyFragment extends Fragment {
         } else {
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
         }
+
+        //设定15秒超时
+        mHandler.sendEmptyMessageDelayed(0, 15000);
         // 查找数据
         query.findObjects(new FindListener<CandyBean>() {
             @Override
@@ -190,6 +202,9 @@ public class CandyFragment extends Fragment {
         if (mRefreshLayout.isRefreshing()) {
             mRefreshLayout.setRefreshing(false);
         } else {
+            mCandyAdapter.finishLoad();
+        }
+        if (mCandyAdapter.mIsLoadMore) {
             mCandyAdapter.finishLoad();
         }
     }

@@ -14,7 +14,7 @@
     <string name="hint_input_description">Candy describes at least 10 words.</string>
     <string name="recommend_submit">Recommend</string>
     <string name="recommend_success">Congratulations, recommend success</string>
-    <string name="recommend_fail">Recommendation failed, please try again later.</string>
+    <string name="recommend_fail">Network error, please try again later.</string>
     <string name="candy_fail">The data failed, please try again later.</string>
     <string name="loading">Loading, please wait a moment&#8230;</string>
     <string name="url_format">Invitation links must be http:// or https://.</string>
@@ -32,7 +32,15 @@
     <string name="recommed_msg">Just a moment, please.&#8230;</string>
     <string name="load_more_end">See the bottom, please don\'t pull any more.</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="feedback_help">Feedback and help</string>
     <string name="candy_get">pick</string>
     <string name="about_us_check_for_update">Check for Updates</string>
     <string name="url_error">Link Error!</string>
+    <string name="feedback_desc">How about CandyMaster? What can we do better?</string>
+    <string name="email">Email: </string>
+    <string name="option">optional</string>
+    <string name="feedback_more">Please write down the details.</string>
+    <string name="fb_wrong_format_email">Is your email correct?</string>
+    <string name="submit">Submit</string>
+    <string name="feedbak_success">Feedback success, Thank you!</string>
 </resources>

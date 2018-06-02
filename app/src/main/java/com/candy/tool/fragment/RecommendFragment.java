@@ -15,6 +15,7 @@ import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
 import com.candy.tool.bean.CandyBean;
 import com.candy.tool.bean.InviteUrl;
+import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
 import java.util.List;
@@ -119,14 +120,22 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
 
     private int getUrlPrefixIndex(String urlString) {
         int index = -1;
-        if (urlString.startsWith("https://goo.gl")) {
-            index = ordinalIndexOf(urlString, "/", 4);
-            if (index < 0) {
-                index = urlString.indexOf("?");
-            }
-            return index;
+        String recommendPreUrl = CommonSharePref.getInstance(getContext())
+                .getRecommendPreUrl();
+        String[] preMasks = null;
+        if (!TextUtils.isEmpty(recommendPreUrl)) {
+            preMasks = recommendPreUrl.split(";");
         }
-        index = ordinalIndexOf(urlString, "/", 3);
+        int indexNum = 3;
+        if (preMasks != null) {
+            for (String preMaskUrl : preMasks) {
+                if (urlString.startsWith(preMaskUrl)) {
+                    indexNum = 4;
+                    break;
+                }
+            }
+        }
+        index = ordinalIndexOf(urlString, "/", indexNum);
         if (index < 0) {
             index = urlString.indexOf("?");
         }

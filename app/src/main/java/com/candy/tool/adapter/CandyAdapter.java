@@ -30,7 +30,7 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private List<CandyBean> mListData = new ArrayList<>();
     private Context mContext;
     private LinearLayoutManager mLayoutManager;
-    private boolean mIsLoadMore;
+    public boolean mIsLoadMore;
 
     public CandyAdapter(Context context) {
         mContext = context;
@@ -99,7 +99,6 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     public void addList(List<CandyBean> data) {
         mListData.addAll(data);
-//        Log.e("gao", "data size = " + mListData.size());
     }
 
     public void clearList() {

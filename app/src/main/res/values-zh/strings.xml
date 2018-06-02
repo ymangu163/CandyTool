@@ -14,7 +14,7 @@
     <string name="hint_input_description">糖果描述至少10个字</string>
     <string name="recommend_submit">推 荐</string>
     <string name="recommend_success">恭喜您，推荐成功</string>
-    <string name="recommend_fail">推荐失败，请稍后重试</string>
+    <string name="recommend_fail">网络异常，请稍后重试</string>
     <string name="candy_fail">获取数据失败，请稍后重试</string>
     <string name="loading">正在加载，请稍等&#8230;</string>
     <string name="url_format">邀请链接必须以http://或者https://开头</string>
@@ -35,4 +35,12 @@
     <string name="candy_get">领 取</string>
     <string name="about_us_check_for_update">检测升级</string>
     <string name="url_error">链接错误！</string>
+    <string name="feedback_help">提个建议</string>
+    <string name="feedback_desc">您觉得糖果助手怎么样? 哪方面可以做得更好？</string>
+    <string name="option">（选填）</string>
+    <string name="submit">提交</string>
+    <string name="feedback_more">请您写详细点儿</string>
+    <string name="feedbak_success">反馈成功，谢谢您的建议。</string>
+    <string name="fb_wrong_format_email">您的 Email 地址是否正确?</string>
+    <string name="email">Email: </string>
 </resources>
