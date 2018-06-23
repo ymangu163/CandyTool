@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#EA4D8F</color>
-    <color name="colorPrimaryDark">#EA4D8F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#ffffff</color>
 
 
-    <color name="main_tab_normal">#c5c5c5</color>
     <color name="white">#ffffff</color>
     <color name="white_80">#ccffffff</color>
     <color name="black">#000000</color>
     <color name="black_80">#cc000000</color>
     <color name="recommend">#DB4D45</color>
     <color name="recommend_press">#CCDB4D45</color>
-    <color name="head">#EA4D8F</color>
-    <color name="reward">#EA4D8F</color>
-    <color name="reward_80">#CCEA4D8F</color>
+    <color name="reward">#FEE237</color>
+    <color name="reward_80">#CCFEE237</color>
     <color name="divider">#D8D8D8</color>
 
     <color name="color_gray_light">#e6e6e6</color>
     <color name="transparent">#00000000</color>
-    <color name="bg_gray">#e6e6e6</color>
+    <color name="action_blue">#4682ED</color>
+
+    <color name="tab_official_golden">#CCFFD93B</color>
+    <color name="tab_official_golden_checked">#FEE237</color>
+    <color name="gray_tab">#464646</color>
+    <color name="gray_bottom">#999999</color>
+    <color name="blue_bottom">#1EAAF1</color>
+    <color name="gray_bg">#F0F3F5</color>
 </resources>

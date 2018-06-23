@@ -41,7 +41,7 @@ import cn.bmob.v3.listener.FindListener;
  * @date 2018/2/25
  */
 
-public class CandyFragment extends Fragment {
+public class CandyUserFragment extends Fragment {
 
     private SwipeRefreshLayout mRefreshLayout;
     private RecyclerView mRecyclerView;
@@ -216,7 +216,7 @@ public class CandyFragment extends Fragment {
     }
 
     private void initRecyclerView() {
-        mCandyAdapter = new CandyAdapter(getActivity());
+        mCandyAdapter = new CandyAdapter<CandyBean>(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mCandyAdapter.setLayoutManager(layoutManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -256,7 +256,7 @@ public class CandyFragment extends Fragment {
 
         });
 
-        mCandyAdapter.setOnItemClickListener(new CandyAdapter.OnItemClickListener() {
+        mCandyAdapter.setOnItemClickListener(new CandyAdapter.OnItemClickListener<CandyBean>() {
             @Override
             public void onItemClick(CandyBean candy) {
                 handleItemClick(candy);

@@ -12,9 +12,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:background="#F4B1D1"/>
+        android:background="@color/colorPrimary"/>
 
-    <android.support.v4.view.ViewPager
+    <com.candy.tool.view.NoScrollViewPager
         android:id="@+id/main_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -25,6 +25,8 @@
         android:id="@+id/bottom_nv"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/white"
+        app:itemIconTint="@color/selector_bottom_menu_color"
+        app:itemTextColor="@color/selector_bottom_menu_color"
         app:menu="@menu/tab_navigation"/>
 </LinearLayout>

@@ -15,4 +15,10 @@
 
     </style>
 
+    <style name="CandyTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="tabIndicatorHeight">1dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
 </resources>

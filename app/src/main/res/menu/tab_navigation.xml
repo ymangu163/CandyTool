@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/tab_recommend"
-        android:icon="@drawable/ic_tab_rocket"
+        android:icon="@drawable/ic_tab_recommend"
         android:title="@string/tab_two"/>
 
     <item

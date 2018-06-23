@@ -7,7 +7,8 @@ import android.view.MenuItem;
 
 import com.candy.tool.R;
 import com.candy.tool.adapter.ViewPagerAdapter;
-import com.candy.tool.fragment.CandyFragment;
+import com.candy.tool.fragment.CandyUserFragment;
+import com.candy.tool.fragment.CandyMainFragment;
 import com.candy.tool.fragment.MyInfoFragment;
 import com.candy.tool.fragment.RecommendFragment;
 import com.tool.librecycle.activity.BaseActivity;
@@ -16,7 +17,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private ViewPager mViewPager;
     private BottomNavigationView mBottomNavigationView;
-    private CandyFragment mCandyFragment;
+    private CandyUserFragment mCandyFragment;
 
     @Override
     public int getLayoutId() {
@@ -41,9 +42,9 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
         mBottomNavigationView.setSelectedItemId(R.id.tab_candy);//根据具体情况调用
         mViewPager.addOnPageChangeListener(this);
         //为viewpager设置adapter
-        mCandyFragment = new CandyFragment();
+        mCandyFragment = new CandyUserFragment();
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        pagerAdapter.addFragment(mCandyFragment);
+        pagerAdapter.addFragment(new CandyMainFragment());
         pagerAdapter.addFragment(new RecommendFragment());
         pagerAdapter.addFragment(new MyInfoFragment());
         mViewPager.setAdapter(pagerAdapter);

@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
@@ -39,6 +42,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
     private EditText mUrlEdit;
     private EditText mDescriptionEdit;
     private Dialog mProgressDialog;
+    private TextView mRecommendTv;
 
     @Nullable
     @Override
@@ -47,8 +51,28 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mNameEdit = rootView.findViewById(R.id.coin_name_et);
         mUrlEdit = rootView.findViewById(R.id.coin_url_et);
         mDescriptionEdit = rootView.findViewById(R.id.coin_description_et);
-        rootView.findViewById(R.id.coin_recommend_tv).setOnClickListener(this);
+        mRecommendTv = rootView.findViewById(R.id.coin_recommend_tv);
+        mRecommendTv.setOnClickListener(this);
+        mDescriptionEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length() == 1) {
+                    mRecommendTv.setEnabled(true);
+                } else if (start == 0) {
+                    mRecommendTv.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
         return rootView;
     }
 

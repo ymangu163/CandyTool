@@ -43,4 +43,6 @@
     <string name="fb_wrong_format_email">Is your email correct?</string>
     <string name="submit">Submit</string>
     <string name="feedbak_success">Feedback success, Thank you!</string>
+    <string name="title_user_candy">User Recommend</string>
+    <string name="title_official_candy">Official Recommend</string>
 </resources>

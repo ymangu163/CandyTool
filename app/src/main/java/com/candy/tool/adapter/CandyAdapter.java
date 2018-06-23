@@ -22,12 +22,12 @@ import java.util.List;
  * @date 2018/2/26
  */
 
-public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class CandyAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private final static int TYPE_CONTENT = 0;//正常内容
     private final static int TYPE_FOOTER = 1;//下拉刷新
     public final static int REQUEST_REFRESH = 1;//更新
     public final static int REQUEST_LOADMORE = 2;//加载更多
-    private List<CandyBean> mListData = new ArrayList<>();
+    private List<T> mListData = new ArrayList<>();
     private Context mContext;
     private LinearLayoutManager mLayoutManager;
     public boolean mIsLoadMore;
@@ -52,9 +52,12 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof CandyViewHolder) {
             CandyViewHolder viewHolder = (CandyViewHolder) holder;
-            CandyBean candyBean = mListData.get(position);
-            viewHolder.setTitle(candyBean.getName());
-            viewHolder.setDescription(candyBean.getDescription());
+            T tBean = mListData.get(position);
+            if (tBean instanceof CandyBean) {
+                CandyBean candyBean = (CandyBean) tBean;
+                viewHolder.setTitle(candyBean.getName());
+                viewHolder.setDescription(candyBean.getDescription());
+            }
             if (onItemClickListener != null) {
                 viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -88,16 +91,16 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         this.mLayoutManager = layoutManager;
     }
 
-    public void setListData(List<CandyBean> data) {
+    public void setListData(List<T> data) {
         mListData.clear();
         mListData.addAll(data);
     }
 
-    public void addItemData(CandyBean item) {
+    public void addItemData(T item) {
         mListData.add(item);
     }
 
-    public void addList(List<CandyBean> data) {
+    public void addList(List<T> data) {
         mListData.addAll(data);
     }
 
@@ -115,8 +118,8 @@ public class CandyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(CandyBean candy);
+    public interface OnItemClickListener<T> {
+        void onItemClick(T candy);
 
         void onItemLongClick(int position);
     }

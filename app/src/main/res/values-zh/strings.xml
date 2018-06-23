@@ -43,4 +43,6 @@
     <string name="feedbak_success">反馈成功，谢谢您的建议。</string>
     <string name="fb_wrong_format_email">您的 Email 地址是否正确?</string>
     <string name="email">Email: </string>
+    <string name="title_user_candy">币友推荐</string>
+    <string name="title_official_candy">官方推荐</string>
 </resources>
