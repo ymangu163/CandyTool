@@ -36,4 +36,8 @@ public class CandyViewHolder  extends RecyclerView.ViewHolder {
     public void setDescription(String description) {
         mDescriptionTv.setText(description);
     }
+
+    public void setOfficialHead() {
+        mHeadTv.setBackgroundResource(R.drawable.shape_head_official);
+    }
 }

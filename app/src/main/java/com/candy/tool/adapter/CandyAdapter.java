@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.candy.tool.R;
 import com.candy.tool.bean.CandyBean;
+import com.candy.tool.bean.OfficialCandy;
 import com.candy.tool.holder.CandyViewHolder;
 
 import java.util.ArrayList;
@@ -57,6 +58,9 @@ public class CandyAdapter<T> extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 CandyBean candyBean = (CandyBean) tBean;
                 viewHolder.setTitle(candyBean.getName());
                 viewHolder.setDescription(candyBean.getDescription());
+                if (tBean instanceof OfficialCandy) {
+                    viewHolder.setOfficialHead();
+                }
             }
             if (onItemClickListener != null) {
                 viewHolder.mCardView.setOnClickListener(new View.OnClickListener() {

@@ -10,6 +10,7 @@ import android.widget.CheckedTextView;
 import android.widget.LinearLayout;
 
 import com.candy.tool.R;
+import com.tool.librecycle.utils.DisplayUtil;
 
 
 public class TabTitleView extends LinearLayout implements Checkable {
@@ -39,15 +40,17 @@ public class TabTitleView extends LinearLayout implements Checkable {
         //noinspection deprecation
 
         if (mContext.getString(R.string.title_user_candy).equals(text)) {
-//            int vipIcon = VpnData.isVipUser() ? R.drawable.ic_rocket_checked : R.drawable.tab_roket_selector;
-//            textView.setCompoundDrawablePadding(RobotUtil.getPixel(getContext(), 6));
-//            textView.setCompoundDrawablesWithIntrinsicBounds(vipIcon, 0, 0, 0);
-//            textView.setTextColor(getResources().getColorStateList(R.color.tab_title_user_color));
+            int vipIcon = R.drawable.selector_tab_user;
+            textView.setCompoundDrawablePadding(DisplayUtil.dip2px(getContext(), 6));
+            textView.setCompoundDrawablesWithIntrinsicBounds(vipIcon, 0, 0, 0);
+            textView.setTextColor(getResources().getColorStateList(R.color.tab_title_user_color));
         } else {
-//            textView.setCompoundDrawablePadding(RobotUtil.getPixel(getContext(), 6));
-//            textView.setCompoundDrawablesWithIntrinsicBounds(vipIcon, 0, 0, 0);
+            int vipIcon = R.drawable.selector_tab_official;
+            textView.setCompoundDrawablePadding(DisplayUtil.dip2px(getContext(), 6));
+            textView.setCompoundDrawablesWithIntrinsicBounds(vipIcon, 0, 0, 0);
+            textView.setTextColor(getResources().getColorStateList(R.color.tab_title_officail_color));
         }
-        textView.setTextColor(getResources().getColorStateList(R.color.tab_title_user_color));
+
 
         textView.setGravity(Gravity.BOTTOM);
 

@@ -42,7 +42,7 @@ public class CandyMainFragment extends Fragment {
     }
 
     private void initView() {
-        TabLayout mTabLayout = mRootView.findViewById(R.id.candy_tab_layout);
+        final TabLayout mTabLayout = mRootView.findViewById(R.id.candy_tab_layout);
         ViewPager mViewPager = mRootView.findViewById(R.id.candy_viewpager);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(new TabLayout.ViewPagerOnTabSelectedListener(mViewPager));
@@ -61,6 +61,5 @@ public class CandyMainFragment extends Fragment {
         mViewPager.setAdapter(pagerAdapter);
 
     }
-
 
 }
