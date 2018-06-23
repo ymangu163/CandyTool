@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+
+import com.tool.librecycle.utils.DisplayUtil;
 
 /**
  * File description
@@ -20,6 +23,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (layoutId > 0) {
             setContentView(layoutId);
         }
+        // 系统 6.0 以上 状态栏白底黑字的实现方法
+        this.getWindow()
+                .getDecorView()
+                .setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+        DisplayUtil.MIUISetStatusBarLightMode(this.getWindow(), true);
+        DisplayUtil.FlymeSetStatusBarLightMode(this.getWindow(), true);
+
         displayHome();
         initViews();
         initData();

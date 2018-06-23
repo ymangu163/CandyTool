@@ -1,1 +1,6 @@
 /build
+/src/test
+/src/androidTest
+*.apk
+/release
+/app/src/main/java/com/candy/tool/activity/AppContext.java

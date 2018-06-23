@@ -6,11 +6,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebChromeClient;
-import android.webkit.WebResourceError;
-import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -114,8 +111,10 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                mLoadingView = View.inflate(DrawCandyActivity.this, R.layout.layout_loading, null);
-                view.addView(mLoadingView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                if (mLoadingView == null) {
+                    mLoadingView = View.inflate(DrawCandyActivity.this, R.layout.layout_loading, null);
+                    view.addView(mLoadingView, LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                }
             }
 
             @Override
@@ -129,14 +128,6 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
             public void onPageCommitVisible(WebView view, String url) {
                 super.onPageCommitVisible(view, url);
                 view.removeView(mLoadingView);
-            }
-
-            @Override
-            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
-                super.onReceivedError(view, request, error);
-                if (Build.VERSION.SDK_INT >= 21) {
-                    Log.e("gao", request.getUrl().toString());
-                }
             }
         });
 

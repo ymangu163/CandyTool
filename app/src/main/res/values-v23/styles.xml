@@ -1,0 +1,24 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="NoActionBarAppTheme" parent="AppTheme">
+        <!-- 全屏、无标题栏、状态栏透明 -->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="CandyTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="tabIndicatorHeight">1dp</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+</resources>
