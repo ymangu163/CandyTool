@@ -11,8 +11,8 @@
     <!--状态栏-->
     <View
         android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:background="@color/colorPrimary"/>
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white"/>
 
     <com.candy.tool.view.NoScrollViewPager
         android:id="@+id/main_viewpager"

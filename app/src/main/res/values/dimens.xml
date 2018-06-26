@@ -1,4 +1,7 @@
 <resources>
 
     <dimen name="toolbar_padding_top">0dp</dimen>
+    <dimen name="action_height">46dp</dimen>
+    <dimen name="status_bar_height">24dp</dimen>
+    <dimen name="info_item_height">50dp</dimen>
 </resources>

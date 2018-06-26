@@ -3,7 +3,6 @@ package com.candy.tool.activity;
 import android.app.Application;
 
 import com.candy.tool.BuildConfig;
-import com.candy.tool.R;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 
@@ -27,7 +26,7 @@ public class AppContext extends Application {
                 .build();
         Fabric.with(this, crashlyticsKit);
 
-        Bmob.initialize(this, getString(R.string.bomb_key),"bmob");
+        Bmob.initialize(this, "ba902d8002bec5b59362195068e278c7");
 
 
     }

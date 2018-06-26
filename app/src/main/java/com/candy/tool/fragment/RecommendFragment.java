@@ -18,6 +18,7 @@ import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
 import com.candy.tool.bean.CandyBean;
 import com.candy.tool.bean.InviteUrl;
+import com.candy.tool.view.ActionView;
 import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
@@ -53,6 +54,10 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         mDescriptionEdit = rootView.findViewById(R.id.coin_description_et);
         mRecommendTv = rootView.findViewById(R.id.coin_recommend_tv);
         mRecommendTv.setOnClickListener(this);
+        ActionView actionView = rootView.findViewById(R.id.recommend_action);
+
+
+
         mDescriptionEdit.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {

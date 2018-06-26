@@ -26,10 +26,11 @@ import com.tool.librecycle.utils.ToastUtils;
  * @date 2018/3/5
  */
 
-public class DrawCandyActivity extends BaseActivity implements View.OnClickListener {
+public class DrawCandyActivity extends BaseActivity {
 
     private WebView mWebView;
     private View mLoadingView;
+    private String mCandyUrl;
 
     @Override
     public int getLayoutId() {
@@ -39,18 +40,17 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void initViews() {
         mWebView = findViewById(R.id.draw_webview);
-        findViewById(R.id.draw_back_iv).setOnClickListener(this);
     }
 
     @Override
     public void initData() {
         Intent intent = getIntent();
-        String candyUrl = intent.getStringExtra("url");
-        if (TextUtils.isEmpty(candyUrl)) {
+        mCandyUrl = intent.getStringExtra("url");
+        if (TextUtils.isEmpty(mCandyUrl)) {
             return;
         }
-        if (!candyUrl.startsWith("http://") && !candyUrl.startsWith("https://")) {
-            candyUrl = "http://" + candyUrl;
+        if (!mCandyUrl.startsWith("http://") && !mCandyUrl.startsWith("https://")) {
+            mCandyUrl = "http://" + mCandyUrl;
         }
         mWebView.clearHistory();
         mWebView.clearCache(true);
@@ -67,14 +67,15 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setDomStorageEnabled(true);
+        settings.setAllowFileAccessFromFileURLs(false);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
 
 
         mWebView.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent));
-        if (isInterceptUrl(candyUrl)) {
-            Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(candyUrl));
+        if (isInterceptUrl(mCandyUrl)) {
+            Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(mCandyUrl));
             try {
                 startActivity(intent1);
             } catch (Exception e) {
@@ -84,7 +85,7 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
             finish();
             return;
         }
-        mWebView.loadUrl(candyUrl);
+        mWebView.loadUrl(mCandyUrl);
 //        mWebView.loadDataWithBaseURL(null, candyUrl, "text/html", "UTF-8", null);
 //        mWebView.loadUrl("https://beta.ivery.one/I/2105967");
 
@@ -166,11 +167,8 @@ public class DrawCandyActivity extends BaseActivity implements View.OnClickListe
         super.onBackPressed();
     }
 
-    @Override
-    public void onClick(View v) {
-        int vId = v.getId();
-        if (vId == R.id.draw_back_iv) {
-            finish();
-        }
+    public String getCandyUrl() {
+        return mCandyUrl;
     }
+
 }

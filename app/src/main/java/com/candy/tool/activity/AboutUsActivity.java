@@ -30,7 +30,6 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
 
         findViewById(R.id.textViewVersion).setOnClickListener(this);
         findViewById(R.id.privacy_tv).setOnClickListener(this);
-        findViewById(R.id.feedback_tv).setOnClickListener(this);
     }
 
     @Override
@@ -45,10 +44,7 @@ public class AboutUsActivity extends BaseActivity implements View.OnClickListene
             startActivity(new Intent(AboutUsActivity.this, PrivacyPolicyActivity.class));
         } else if (vId == R.id.textViewVersion) {
             CandyUtil.viewApp(AboutUsActivity.this, getPackageName());
-        } else if (vId == R.id.feedback_tv) {
-            startActivity(new Intent(AboutUsActivity.this, FeedbackActivity.class));
         }
-
 
     }
 }

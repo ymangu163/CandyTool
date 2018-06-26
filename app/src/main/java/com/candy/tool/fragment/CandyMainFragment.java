@@ -62,4 +62,8 @@ public class CandyMainFragment extends Fragment {
 
     }
 
+    public void refreshSysData() {
+        mCandyFragment.refreshSysData();
+    }
+
 }

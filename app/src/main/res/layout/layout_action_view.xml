@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/action_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray_tab"
+        android:textSize="16sp"
+        tools:text="糖果詳情"
+        android:layout_centerInParent="true"
+        />
+
+    <ImageView
+        android:id="@+id/action_back_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/action_height"
+        android:src="@drawable/ic_action_back"
+        android:paddingLeft="16dp"
+        android:scaleType="center"
+        android:layout_centerVertical="true"
+        />
+
+    <ImageView
+        android:id="@+id/action_packet_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/action_height"
+        android:src="@drawable/ic_red_packet"
+        android:layout_alignParentRight="true"
+        android:paddingRight="16dp"
+        android:paddingLeft="16dp"
+        />
+</merge>

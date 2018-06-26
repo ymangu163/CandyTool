@@ -13,3 +13,4 @@
 /release
 /candy_key.keystore
 /candy.jks
+/app/src/main/java/com/candy/tool/activity/AppContext.java

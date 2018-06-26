@@ -45,4 +45,8 @@
     <string name="feedbak_success">Feedback success, Thank you!</string>
     <string name="title_user_candy">User Recommend</string>
     <string name="title_official_candy">Official Recommend</string>
+    <string name="candy_detail">Candy Detail</string>
+    <string name="candy_draw">Get Candy</string>
+    <string name="action_feedback">An Idea</string>
+    <string name="string_copied">Copied</string>
 </resources>

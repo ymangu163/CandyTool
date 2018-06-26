@@ -1,8 +1,5 @@
 package com.candy.tool.activity;
 
-import android.content.ClipData;
-import android.content.ClipboardManager;
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
@@ -63,23 +60,10 @@ public class CandyDetailActivity extends BaseActivity {
                 Intent intent = new Intent(CandyDetailActivity.this, DrawCandyActivity.class);
                 intent.putExtra("url", candyUrl.trim());
                 startActivity(intent);
-//                copyUrl2Clipboard(candyUrl);
             }
         });
 
         getMaskUrls();
-    }
-
-    private void copyUrl2Clipboard(String url) {
-        //获取剪贴板管理器：
-        ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        // 创建普通字符型ClipData
-        ClipData mClipData = ClipData.newPlainText("url", url);
-        // 将ClipData内容放到系统剪贴板里。
-        if (cm != null) {
-            cm.setPrimaryClip(mClipData);
-        }
-
     }
 
     private String getSingleUrl(CandyBean candyBean) {

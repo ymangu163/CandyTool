@@ -36,7 +36,7 @@
     <string name="about_us_check_for_update">检测升级</string>
     <string name="url_error">链接错误！</string>
     <string name="feedback_help">提个建议</string>
-    <string name="feedback_desc">您觉得糖果助手怎么样? 哪方面可以做得更好？</string>
+    <string name="feedback_desc">您觉得糖果助手怎么样? 哪些方面可以做得更好？</string>
     <string name="option">（选填）</string>
     <string name="submit">提交</string>
     <string name="feedback_more">请您写详细点儿</string>
@@ -45,4 +45,8 @@
     <string name="email">Email: </string>
     <string name="title_user_candy">币友推荐</string>
     <string name="title_official_candy">官方推荐</string>
+    <string name="candy_detail">糖果详情</string>
+    <string name="candy_draw">领取糖果</string>
+    <string name="action_feedback">一个想法</string>
+    <string name="string_copied">已复制</string>
 </resources>

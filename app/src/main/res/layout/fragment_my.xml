@@ -1,60 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_bg"
-    >
+    android:orientation="vertical">
 
-    <RelativeLayout
+    <com.candy.tool.view.ActionView
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:background="@color/white">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_candy" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        app:scene="my infor" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:divider="@drawable/shape_divider"
-        android:showDividers="middle"
-        android:paddingLeft="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
-        >
+        android:divider="@drawable/shape_divider"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:showDividers="middle">
 
         <TextView
             android:id="@+id/my_recommend_tv"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/info_item_height"
             android:gravity="center_vertical"
             android:text="@string/my_recommend"
-            android:textSize="18sp" />
+            android:textColor="@color/gray_tab"
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/recommend_state_tv"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/info_item_height"
             android:gravity="center_vertical"
             android:text="@string/my_recommend_state"
-            android:textSize="18sp" />
+            android:textColor="@color/gray_tab"
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/feedback_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/info_item_height"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/action_feedback"
+        android:textColor="@color/gray_tab"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/my_about_tv"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/info_item_height"
         android:layout_marginTop="10dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="@string/my_about"
-        android:background="@color/white"
-        android:textSize="18sp" />
+        android:textColor="@color/gray_tab"
+        android:textSize="16sp" />
 
 </LinearLayout>

@@ -2,27 +2,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/gray_bg"
     android:orientation="vertical"
-    android:padding="16dp">
+    >
+
+    <View
+        android:id="@+id/feedback_status"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/status_bar_height"
+        android:background="@color/white"
+        />
+    <com.candy.tool.view.ActionView
+        android:id="@+id/feedback_action"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:scene="feedback"
+        android:layout_below="@+id/feedback_status"
+        />
 
     <TextView
         android:id="@+id/feedback_desc_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="@string/feedback_desc"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:layout_below="@+id/feedback_action"
+        android:layout_marginTop="26dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        />
 
     <EditText
         android:id="@+id/feedback_content_et"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_below="@+id/feedback_desc_tv"
-        android:layout_marginTop="16dp"
         android:background="@drawable/shape_white_corner"
         android:gravity="top"
         android:padding="16dp"
+        android:layout_margin="16dp"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:cursorVisible="true"
@@ -40,7 +59,9 @@
         android:orientation="horizontal"
         android:paddingLeft="10dp"
         android:paddingStart="10dp"
-        android:showDividers="middle">
+        android:showDividers="middle"
+        android:layout_margin="16dp"
+        >
 
         <TextView
             android:layout_width="wrap_content"
@@ -78,8 +99,8 @@
         android:background="@drawable/selector_recommend"
         android:gravity="center"
         android:text="@string/submit"
-        android:layout_marginRight="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
         android:textColor="@color/gray_tab"
         android:textSize="18sp"
         android:enabled="false"

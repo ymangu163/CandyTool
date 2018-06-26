@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.candy.tool.R;
 import com.candy.tool.activity.AboutRecommendActivity;
 import com.candy.tool.activity.AboutUsActivity;
+import com.candy.tool.activity.FeedbackActivity;
 import com.tool.librecycle.utils.ToastUtils;
 
 /**
@@ -30,6 +31,7 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener {
         rootView.findViewById(R.id.my_recommend_tv).setOnClickListener(this);
         rootView.findViewById(R.id.recommend_state_tv).setOnClickListener(this);
         rootView.findViewById(R.id.my_about_tv).setOnClickListener(this);
+        rootView.findViewById(R.id.feedback_tv).setOnClickListener(this);
         return rootView;
     }
 
@@ -37,14 +39,17 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         int vId = view.getId();
         if (vId == R.id.my_recommend_tv) {
-            ToastUtils.showToastForShort(getContext(),"敬请期待...");
+            ToastUtils.showToastForShort(getContext(), "敬请期待...");
         } else if (vId == R.id.recommend_state_tv) {
             Intent intent = new Intent(getActivity(), AboutRecommendActivity.class);
             startActivity(intent);
         } else if (vId == R.id.my_about_tv) {
             Intent intent = new Intent(getActivity(), AboutUsActivity.class);
             startActivity(intent);
+        } else if (vId == R.id.feedback_tv) {
+            startActivity(new Intent(getActivity(), FeedbackActivity.class));
         }
+
 
     }
 }
