@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="微信"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/black_80"
             android:gravity="center_horizontal"
             />
@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="imToken"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textColor="@color/black_80"
             android:gravity="center_horizontal"
             />

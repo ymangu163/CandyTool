@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">糖果助手</string>
-    <string name="bomb_key">ba902d8002bec5b59362195068e278c7</string>
     <string name="tab_one">糖 果</string>
     <string name="tab_two">推 荐</string>
     <string name="tab_three">我 的</string>
