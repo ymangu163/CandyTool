@@ -6,7 +6,6 @@ import com.candy.tool.BuildConfig;
 import com.crashlytics.android.Crashlytics;
 import com.crashlytics.android.core.CrashlyticsCore;
 
-import cn.bmob.v3.Bmob;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -25,9 +24,6 @@ public class AppContext extends Application {
                 .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
                 .build();
         Fabric.with(this, crashlyticsKit);
-
-        Bmob.initialize(this, "ba902d8002bec5b59362195068e278c7");
-
 
     }
 }
