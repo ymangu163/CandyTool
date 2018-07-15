@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Candy Master</string>
+
+    <string name="tab_one">Candy</string>
+    <string name="tab_two">Recommend</string>
+    <string name="tab_three">My</string>
+    <string name="coin_name">Candy Name:</string>
+    <string name="coin">coin</string>
+    <string name="hint_input_coin_name">Please enter the name of the candy.</string>
+    <string name="coin_name_length">The candy name should be 2~8 characters.</string>
+    <string name="invite_url">Invite Link:</string>
+    <string name="hint_input_url">Please enter your invitation link.</string>
+    <string name="coin_description">Candy description:</string>
+    <string name="hint_input_description">Candy describes at least 10 words.</string>
+    <string name="recommend_submit">Recommend</string>
+    <string name="recommend_success">Congratulations, recommend success</string>
+    <string name="recommend_fail">Network error, please try again later.</string>
+    <string name="candy_fail">The data failed, please try again later.</string>
+    <string name="loading">Loading, please wait a moment&#8230;</string>
+    <string name="url_format">Invitation links must be http:// or https://.</string>
+
+    <string name="my_recommend">My Recommendation</string>
+    <string name="my_recommend_state">About Recommendation</string>
+    <string name="my_about">About us</string>
+    <string name="about_recommend_goal">&#160;&#160;&#160;&#160;&#160;&#160;Candy is a big benefit to ordinary people in the block chain. In order to make this ecological healthy development, the recommended interface is provided in the application, so that more users can participate in it. Each candy will include the first three invitations and distribute it to the recipients at a certain rate.</string>
+    <string name="about_recommend_reward">&#160;&#160;&#160;&#160;&#160;&#160;In order to create a pure ecology, there is no such profit-making model as paid-in and advertising, which is completely free. \n </string>
+    <string name="reward">reward</string>
+
+    <string name="about_copyright">Candy Master©2018</string>
+    <string name="about_contact_gmail">Contact us：\nblockchaincandymaster@gmail.com</string>
+    <string name="recommend_full">The candy has been recommended by many people and you can recommend other candies.</string>
+    <string name="recommed_msg">Just a moment, please.&#8230;</string>
+    <string name="load_more_end">See the bottom, please don\'t pull any more.</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="feedback_help">Feedback and help</string>
+    <string name="candy_get">pick</string>
+    <string name="about_us_check_for_update">Check for Updates</string>
+    <string name="url_error">Link Error!</string>
+    <string name="feedback_desc">How about CandyMaster? What can we do better?</string>
+    <string name="email">Email: </string>
+    <string name="option">optional</string>
+    <string name="feedback_more">Please write down the details.</string>
+    <string name="fb_wrong_format_email">Is your email correct?</string>
+    <string name="submit">Submit</string>
+    <string name="feedbak_success">Feedback success, Thank you!</string>
+    <string name="title_user_candy">User Recommend</string>
+    <string name="title_official_candy">Official Recommend</string>
+    <string name="candy_detail">Candy Detail</string>
+    <string name="candy_draw">Get Candy</string>
+    <string name="action_feedback">An Idea</string>
+    <string name="action_help">Help</string>
+    <string name="string_copied">Copied</string>
+</resources>

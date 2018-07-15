@@ -10,6 +10,8 @@ import com.candy.tool.adapter.ViewPagerAdapter;
 import com.candy.tool.fragment.CandyMainFragment;
 import com.candy.tool.fragment.MyInfoFragment;
 import com.candy.tool.fragment.RecommendFragment;
+import com.candy.tool.utils.StatConstant;
+import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.activity.BaseActivity;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
@@ -84,9 +86,11 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
                 break;
             case 1:
                 mBottomNavigationView.setSelectedItemId(R.id.tab_recommend);
+                StatUtil.onEvent(StatConstant.CANDY_RECOMMEND);
                 break;
             case 2:
                 mBottomNavigationView.setSelectedItemId(R.id.tab_my);
+                StatUtil.onEvent(StatConstant.TAB_MY);
                 break;
             default:
                 break;

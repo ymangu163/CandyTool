@@ -15,6 +15,9 @@ import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.activity.DrawCandyActivity;
+import com.candy.tool.dialog.ShareDialog;
+import com.candy.tool.utils.StatConstant;
+import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.utils.ToastUtils;
 
 /**
@@ -30,6 +33,7 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
     private ImageView mBackIv;
     private ImageView mPacketIv;
     private String mScene = "";
+    private ImageView mShareIv;
 
     public ActionView(Context context) {
         this(context, null);
@@ -50,8 +54,10 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
         mTitleTv = findViewById(R.id.action_title_tv);
         mBackIv = findViewById(R.id.action_back_iv);
         mPacketIv = findViewById(R.id.action_packet_iv);
+        mShareIv = findViewById(R.id.action_share);
         mBackIv.setOnClickListener(this);
         mPacketIv.setOnClickListener(this);
+        mShareIv.setOnClickListener(this);
 
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.ActionView);
         mScene = typedArray.getString(R.styleable.ActionView_scene);
@@ -67,6 +73,8 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
                 break;
             case "candy detail":
                 mBackIv.setVisibility(View.VISIBLE);
+                mPacketIv.setImageResource(R.drawable.ic_share);
+                mShareIv.setVisibility(View.GONE);
                 mTitleTv.setText(R.string.candy_detail);
                 break;
             case "drawer":
@@ -78,11 +86,23 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
             case "feedback":
                 mBackIv.setVisibility(View.VISIBLE);
                 mPacketIv.setVisibility(View.GONE);
+                mShareIv.setVisibility(View.GONE);
                 mTitleTv.setText(R.string.action_feedback);
                 break;
             case "my infor":
                 mBackIv.setVisibility(View.GONE);
+                mPacketIv.setVisibility(View.GONE);
+                mShareIv.setVisibility(View.GONE);
                 mTitleTv.setText(R.string.tab_three);
+                break;
+            case "Policy":
+                mTitleTv.setText(R.string.privacy_policy);
+                mPacketIv.setVisibility(View.GONE);
+                mShareIv.setVisibility(View.GONE);
+                break;
+            case "FAQ":
+                mTitleTv.setText(R.string.action_help);
+                mShareIv.setVisibility(View.GONE);
                 break;
             default:
                 break;
@@ -99,20 +119,32 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
                 ((Activity) mContext).finish();
             }
         } else if (vId == R.id.action_packet_iv) {
-            if (mScene.equals("drawer")) {
-                if (mContext instanceof DrawCandyActivity) {
-                    copy2Clipboard(((DrawCandyActivity) mContext).getCandyUrl());
-                }
-            } else {
-                String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
-                        "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2F{urlCode}%3F_s" +
-                        "%3Dweb-other&_t=1472443966571#Intent;" +
-                        "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
+            handleRedPacket();
+        } else if (vId == R.id.action_share) {
+            showShareDialog();
 
-                startIntentUrl(mContext, INTENT_URL_FORMAT.replace("{urlCode}", "c1x05828dbb5uwtrasbia19"));
-            }
         }
 
+    }
+
+    private void handleRedPacket() {
+        if (mScene.equals("drawer")) {
+            if (mContext instanceof DrawCandyActivity) {
+                copy2Clipboard(((DrawCandyActivity) mContext).getCandyUrl());
+                StatUtil.onEvent(StatConstant.CANDY_COPY);
+            }
+        } else if (mScene.equals("candy detail")) {
+            showShareDialog();
+        } else {
+            String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
+                    "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2F{urlCode}%3F_s" +
+                    "%3Dweb-other&_t=1472443966571#Intent;" +
+                    "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
+
+            startIntentUrl(mContext, INTENT_URL_FORMAT.replace("{urlCode}", "c1x05828dbb5uwtrasbia19"));
+
+            StatUtil.onEvent(StatConstant.RED_PACKET_CLICK, mScene);
+        }
     }
 
     /**
@@ -143,5 +175,9 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
             cm.setPrimaryClip(mClipData);
             ToastUtils.showToastForShort(mContext, mContext.getString(R.string.string_copied));
         }
+    }
+
+    private void showShareDialog() {
+        new ShareDialog(mContext).show();
     }
 }

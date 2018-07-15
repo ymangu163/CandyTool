@@ -39,7 +39,7 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".activity.AboutRecommendActivity"
+            android:name=".activity.FAQActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" />
 

@@ -18,6 +18,8 @@ import com.candy.tool.R;
 import com.candy.tool.activity.MainActivity;
 import com.candy.tool.bean.CandyBean;
 import com.candy.tool.bean.InviteUrl;
+import com.candy.tool.utils.StatConstant;
+import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
@@ -82,6 +84,7 @@ public class RecommendFragment extends Fragment implements View.OnClickListener 
         int vId = view.getId();
         if (vId == R.id.coin_recommend_tv) {
             submit();
+            StatUtil.onEvent(StatConstant.CANDY_RECOMMEND_CLICK);
         }
     }
 

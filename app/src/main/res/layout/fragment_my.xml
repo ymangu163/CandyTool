@@ -8,37 +8,9 @@
 
     <com.candy.tool.view.ActionView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/action_height"
         app:scene="my infor" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:divider="@drawable/shape_divider"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:showDividers="middle">
-
-        <TextView
-            android:id="@+id/my_recommend_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/info_item_height"
-            android:gravity="center_vertical"
-            android:text="@string/my_recommend"
-            android:textColor="@color/gray_tab"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/recommend_state_tv"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/info_item_height"
-            android:gravity="center_vertical"
-            android:text="@string/my_recommend_state"
-            android:textColor="@color/gray_tab"
-            android:textSize="16sp" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/feedback_tv"
@@ -49,6 +21,30 @@
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:text="@string/action_feedback"
+        android:textColor="@color/gray_tab"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/help_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/info_item_height"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="@string/action_help"
+        android:textColor="@color/gray_tab"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/my_share_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/info_item_height"
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingStart="16dp"
+        android:text="@string/action_share"
         android:textColor="@color/gray_tab"
         android:textSize="16sp" />
 

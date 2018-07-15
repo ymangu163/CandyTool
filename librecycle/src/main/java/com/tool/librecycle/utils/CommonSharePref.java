@@ -22,6 +22,7 @@ public class CommonSharePref {
     private final String KEY_REFRESH_RESULT = "key_refresh_result";
     private final String KEY_REFRESH_OFFICIAL_RESULT = "key_refresh_official_result";
     private final String KEY_RECOMMEND_PREURL = "key_recommend_preurl";
+    private final String KEY_PACKET_CLICK_TIME = "key_packet_click_time";
 
     /************************结束定义 KEY*****************************/
 
@@ -134,5 +135,13 @@ public class CommonSharePref {
 
     public void setRefreshOfficialResult(String value) {
         putString(KEY_REFRESH_OFFICIAL_RESULT, value);
+    }
+
+    public long getPaketClickTime() {
+        return getLong(KEY_PACKET_CLICK_TIME, 0);
+    }
+
+    public void setPaketClickTime(long value) {
+        putLong(KEY_PACKET_CLICK_TIME, value);
     }
 }

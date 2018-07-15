@@ -11,6 +11,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,13 +156,14 @@ public class CandyUserFragment extends Fragment {
         } else {
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
         }
-
+        Log.e("gao", "start request " + query.toString());
         //设定15秒超时
         mHandler.sendEmptyMessageDelayed(0, 15000);
         // 查找数据
         query.findObjects(new FindListener<CandyBean>() {
             @Override
             public void done(List<CandyBean> list, BmobException e) {
+                Log.e("gao", "request result.");
                 if (e != null) {
                     refreshStat();
                     ToastUtils.showToastForShort(getContext(), getString(R.string.candy_fail));
@@ -242,6 +244,7 @@ public class CandyUserFragment extends Fragment {
                     }
 
                     mCandyAdapter.startLoad();
+                    Log.e("gao", "start loadmore");
                     queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE, true);
                 }
                 mLastVisibleItemPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();

@@ -24,7 +24,6 @@ import com.candy.tool.utils.GsonUtil;
 import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -131,8 +130,8 @@ public class CandyOfficialFragment extends Fragment {
                 dateNowStr = dateNowStr.substring(0, 17) + "00";
                 try {
                     date = dateFormat.parse(dateNowStr);
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                } catch (Exception e) {
+                    //
                 }
             } else {
                 date = new Date();

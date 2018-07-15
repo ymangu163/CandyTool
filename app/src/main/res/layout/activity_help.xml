@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="4dp">
+    android:orientation="vertical"
+    >
 
     <View
-        android:id="@+id/detail_status_space"
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_bar_height"
         android:background="@color/white"
         />
     <com.candy.tool.view.ActionView
-        android:id="@+id/action_policy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scene="Policy"
-        android:layout_below="@+id/detail_status_space"
+        app:scene="FAQ"
         />
-
-    <WebView
-        android:id="@+id/privacy_policy_webview"
+    <ExpandableListView
+        android:id="@+id/help_expan_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/action_policy"
+        android:divider="@null"
+        android:groupIndicator="@null"
+        android:scrollbars="none"
+        android:layout_marginTop="2dp"
+        android:background="@color/white"
         />
 
-</RelativeLayout>
+</LinearLayout>

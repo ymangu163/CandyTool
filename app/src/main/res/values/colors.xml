@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimary">#1EAAF1</color>
     <color name="colorPrimaryDark">#ffffff</color>
     <color name="colorAccent">#ffffff</color>
 
 
     <color name="white">#ffffff</color>
     <color name="white_80">#ccffffff</color>
+    <color name="white_90">#e5ffffff</color>
     <color name="black">#000000</color>
     <color name="black_80">#cc000000</color>
     <color name="recommend">#DB4D45</color>

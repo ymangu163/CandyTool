@@ -20,5 +20,12 @@ public class CommonUtil {
         }
     }
 
+    public static int getVersionCode(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 
 }

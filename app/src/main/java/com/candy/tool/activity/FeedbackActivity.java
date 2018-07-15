@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.bean.Feedback;
+import com.candy.tool.utils.StatConstant;
+import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.activity.BaseActivity;
 import com.tool.librecycle.utils.ToastUtils;
 
@@ -64,7 +66,7 @@ public class FeedbackActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void initData() {
-
+        StatUtil.onEvent(StatConstant.FEEDBACK_ENTER);
     }
 
     @Override
