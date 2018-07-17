@@ -10,7 +10,6 @@ buildscript {
 }
 apply plugin: 'com.android.application'
 apply plugin: 'io.fabric'
-apply plugin: 'com.mob.sdk'
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -28,7 +27,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
         versionCode verCode
-        versionName "1.4.0"
+        versionName "1.5.0"
     }
 
     signingConfigs {
@@ -63,32 +62,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    useLibrary 'org.apache.http.legacy'
-}
 
-MobSDK {
-    appKey "26dd42026f431"
-    appSecret "69bf4cd7e07c582f71a610d724859920"
-    ShareSDK {
-        devInfo {
-            Wechat {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                userName "gh_afb25ac019c9"
-                path "pages/index/index.html?id=1"
-                withShareTicket true
-                miniprogramType 2
-                bypassApproval true
-            }
-
-            WechatMoments {
-                appId "wx4868b35061f87885"
-                appSecret "64020361b8ec4c99936c0e3999a9f249"
-                bypassApproval true
-                enable true
-            }
-        }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
+    useLibrary 'org.apache.http.legacy'
 }
 
 dependencies {
@@ -97,8 +76,5 @@ dependencies {
     implementation 'cn.bmob.android:bmob-sdk:3.6.0'
     implementation('com.crashlytics.sdk.android:crashlytics:2.9.1@aar') {
         transitive = true
-    }
-    implementation ('com.xyzlf.share:sharesdk:0.0.10') {
-        exclude group: 'com.android.support', module: 'appcompat-v7'
     }
 }

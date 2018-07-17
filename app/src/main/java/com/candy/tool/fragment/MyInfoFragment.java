@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.candy.tool.R;
-import com.candy.tool.activity.FAQActivity;
 import com.candy.tool.activity.AboutUsActivity;
+import com.candy.tool.activity.FAQActivity;
 import com.candy.tool.activity.FeedbackActivity;
-import com.candy.tool.dialog.ShareDialog;
 
 /**
  * File description
@@ -47,11 +46,21 @@ public class MyInfoFragment extends Fragment implements View.OnClickListener {
         } else if (vId == R.id.feedback_tv) {
             startActivity(new Intent(getActivity(), FeedbackActivity.class));
         } else if (vId == R.id.my_share_tv) {
-            if (getActivity() != null) {
-                new ShareDialog(getActivity()).show();
-            }
+            shareIntent();
         }
 
 
+    }
+
+    private void shareIntent() {
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, "[分享]区块链糖果分享与领取工具\n" +
+                "http://www.beestore.io/share/share.html?appId=43948e1d5e044714a394dd3a10a9bcfe");
+        intent.putExtra(Intent.EXTRA_TITLE, getString(R.string.app_name));
+        intent.putExtra(Intent.EXTRA_SUBJECT, "http://p70aghfji.bkt.clouddn.com/com.candy.tool/1.4.0/2018-06-27_1530092816251.png");
+        Intent chooserIntent = Intent.createChooser(intent, "分享到：");
+        startActivity(chooserIntent);
     }
 }

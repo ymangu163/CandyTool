@@ -40,6 +40,7 @@
         android:src="@drawable/ic_share"
         android:paddingRight="16dp"
         android:layout_toStartOf="@+id/action_packet_iv"
+        android:visibility="gone"
         />
 
 </merge>
