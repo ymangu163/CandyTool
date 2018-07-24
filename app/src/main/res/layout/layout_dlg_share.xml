@@ -62,6 +62,32 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/share_others_layout"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/ic_share_others"
+            />
+
+        <TextView
+            android:id="@+id/share_others"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="更多"
+            android:textColor="@color/gray_tab"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            />
+
+    </LinearLayout>
 </LinearLayout>
 

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.candy.tool.R;
 import com.candy.tool.activity.DrawCandyActivity;
+import com.candy.tool.dialog.ShareDialog;
 import com.candy.tool.utils.StatConstant;
 import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.utils.ToastUtils;
@@ -120,8 +121,7 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
         } else if (vId == R.id.action_packet_iv) {
             handleRedPacket();
         } else if (vId == R.id.action_share) {
-            shareIntent();
-
+           new ShareDialog(mContext).show();
         }
 
     }
@@ -133,7 +133,7 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
                 StatUtil.onEvent(StatConstant.CANDY_COPY);
             }
         } else if (mScene.equals("candy detail")) {
-            shareIntent();
+            new ShareDialog(mContext).show();
         } else {
             String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
                     "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2F{urlCode}%3F_s" +
@@ -183,7 +183,8 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
         intent.putExtra(Intent.EXTRA_TEXT, "[分享]区块链糖果分享与领取工具\n" +
                 "http://www.beestore.io/share/share.html?appId=43948e1d5e044714a394dd3a10a9bcfe");
         intent.putExtra(Intent.EXTRA_TITLE, mContext.getString(R.string.app_name));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "http://p70aghfji.bkt.clouddn.com/com.candy.tool/1.4.0/2018-06-27_1530092816251.png");
+        intent.putExtra(Intent.EXTRA_SUBJECT, "[分享]区块链糖果分享与领取工具\n" +
+                "http://www.beestore.io/share/share.html?appId=43948e1d5e044714a394dd3a10a9bcfe");
         Intent chooserIntent = Intent.createChooser(intent, "分享到：");
         mContext.startActivity(chooserIntent);
     }

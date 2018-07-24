@@ -73,3 +73,15 @@
 -dontwarn com.crashlytics.**
 -keepattributes SourceFile,LineNumberTable,*Annotation*
 -keep class com.crashlytics.android.**
+
+-keep class com.tencent.mm.opensdk.** {
+*;
+}
+
+-keep class com.tencent.wxop.** {
+*;
+}
+
+-keep class com.tencent.mm.sdk.** {
+*;
+}

@@ -13,6 +13,7 @@ public class Config extends BmobObject {
 
     private int versionCode;
     private String faq;
+    private String share;
 
     public int getVersionCode() {
         return versionCode;
@@ -20,5 +21,9 @@ public class Config extends BmobObject {
 
     public String getFaq() {
         return faq;
+    }
+
+    public String getShare() {
+        return share;
     }
 }
