@@ -6,7 +6,7 @@ import com.candy.tool.R;
 import com.candy.tool.adapter.FaqAdapter;
 import com.candy.tool.bean.Config;
 import com.candy.tool.bean.FaqEntry;
-import com.candy.tool.utils.CandyUtil;
+import com.candy.tool.utils.AppUtil;
 import com.candy.tool.utils.GsonUtil;
 import com.candy.tool.utils.StatConstant;
 import com.candy.tool.utils.StatUtil;
@@ -54,7 +54,7 @@ public class FAQActivity extends BaseActivity {
             @Override
             public void done(Config object, BmobException e) {
                 if (e != null) {
-                    String faqJson = CandyUtil.getJsonFromAssets(FAQActivity.this,"faq.json");
+                    String faqJson = AppUtil.getJsonFromAssets(FAQActivity.this,"faq.json");
                     List<FaqEntry> faqList = GsonUtil.gson2List(faqJson, FaqEntry.class);
                     mFaqAdapter.setFaqList(faqList);
                     return;

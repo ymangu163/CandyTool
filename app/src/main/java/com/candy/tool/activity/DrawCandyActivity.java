@@ -1,5 +1,6 @@
 package com.candy.tool.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -26,6 +27,7 @@ import com.tool.librecycle.utils.ToastUtils;
  * @date 2018/3/5
  */
 
+@SuppressLint("SetJavaScriptEnabled")
 public class DrawCandyActivity extends BaseActivity {
 
     private WebView mWebView;

@@ -19,7 +19,7 @@ import java.util.Locale;
  * @date 2018/4/26
  */
 
-public class CandyUtil {
+public class AppUtil {
 
 
     public static void viewApp(Context context, String packageName) {
@@ -92,5 +92,13 @@ public class CandyUtil {
         String current_time = sf.format(timeMillis);
 
         return sp_time.equals(current_time);
+    }
+
+    public static int getVersionCode(Context context) {
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionCode;
+        } catch (Exception e) {
+            return -1;
+        }
     }
 }

@@ -4,20 +4,18 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/gray_bg"
-    >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/about_top_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="100dp"
+        android:background="@color/white"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:background="@color/white"
         android:paddingBottom="16dp"
-        >
+        android:paddingTop="100dp">
 
         <ImageView
             android:layout_width="72dp"
@@ -42,23 +40,23 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:background="@color/white"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        >
+        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/textViewVersion"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@drawable/selector_setting_item"
-            android:text="@string/about_us_check_for_update"
             android:gravity="center"
+            android:text="@string/about_us_check_for_update"
             android:textColor="@android:color/black"
             android:textSize="16sp" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
@@ -70,35 +68,37 @@
             android:id="@+id/privacy_tv"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="@string/privacy_policy"
-            android:textColor="@color/black_80"
             android:background="@drawable/selector_setting_item"
             android:gravity="center"
+            android:text="@string/privacy_policy"
+            android:textColor="@color/black_80"
             android:textSize="16sp" />
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text="@string/about_contact_gmail"
-        android:textColor="@color/black_80"
-        android:textSize="16sp"
-        android:paddingTop="10dp"
-        android:paddingLeft="10dp"
+        android:layout_height="match_parent"
         android:background="@color/white"
-        />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/about_authority_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
-        android:gravity="center_horizontal"
-        android:text="@string/about_copyright"
-        android:textColor="#c0000000"
-        android:textSize="16sp"
-        android:background="@color/white"
-        />
+        <TextView
+            style="@style/actionStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/info_item_height"
+            android:gravity="center_vertical"
+            android:text="服务微信：toolmaster9527"
+            android:textIsSelectable="true" />
+
+        <TextView
+            style="@style/actionStyle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/info_item_height"
+            android:gravity="center_vertical"
+            android:text="交流Q群：706220324"
+            android:textIsSelectable="true" />
+
+    </LinearLayout>
 
 </LinearLayout>

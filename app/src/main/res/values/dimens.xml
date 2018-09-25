@@ -4,4 +4,13 @@
     <dimen name="action_height">46dp</dimen>
     <dimen name="status_bar_height">24dp</dimen>
     <dimen name="info_item_height">50dp</dimen>
+    <dimen name="code_text">16sp</dimen>
+
+
+    <dimen name="search_height">34dp</dimen>
+    <dimen name="code_item_height">50dp</dimen>
+    <dimen name="code_action_height">40dp</dimen>
+    <dimen name="code_action_padding">10dp</dimen>
+    <dimen name="code_margin_start">16dp</dimen>
+
 </resources>

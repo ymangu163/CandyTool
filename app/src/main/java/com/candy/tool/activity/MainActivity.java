@@ -7,12 +7,20 @@ import android.view.MenuItem;
 
 import com.candy.tool.R;
 import com.candy.tool.adapter.ViewPagerAdapter;
+import com.candy.tool.bean.Upgrade;
+import com.candy.tool.dialog.UpgradeDialog;
 import com.candy.tool.fragment.CandyMainFragment;
 import com.candy.tool.fragment.MyInfoFragment;
 import com.candy.tool.fragment.RecommendFragment;
+import com.candy.tool.utils.AppUtil;
 import com.candy.tool.utils.StatConstant;
 import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.activity.BaseActivity;
+import com.tool.librecycle.utils.CommonSharePref;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.QueryListener;
 
 public class MainActivity extends BaseActivity implements BottomNavigationView.OnNavigationItemSelectedListener, ViewPager.OnPageChangeListener {
 
@@ -34,7 +42,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     @Override
     public void initData() {
-
+        checkAppUpdate();
     }
 
     private void initListener() {
@@ -116,5 +124,36 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
     private void clickTabThree() {
         mViewPager.setCurrentItem(2, false);
+    }
+
+
+    private void checkAppUpdate() {
+        if (CommonSharePref.getInstance(this).getUpgradeTime() - System.currentTimeMillis() < 48 * 3600 * 1000) {
+            return;
+        }
+
+        BmobQuery<Upgrade> query = new BmobQuery<Upgrade>();
+        query.getObject("2yCseeel", new QueryListener<Upgrade>() {
+
+            @Override
+            public void done(Upgrade bean, BmobException e) {
+                if (e != null) {
+                    return;
+                }
+                int currVerionCode = AppUtil.getVersionCode(AppContext.getInstance());
+                if (bean.getVersioncode() > currVerionCode) {
+                    showUpgradeDlg(bean);
+                }
+            }
+        });
+    }
+
+    private void showUpgradeDlg(Upgrade bean) {
+        UpgradeDialog upgradeDialog = new UpgradeDialog(this);
+        upgradeDialog.setDownloadUrl(bean.getDownload());
+        upgradeDialog.setMsgStr(bean.getDescription());
+        upgradeDialog.setCancelable(!bean.isForce());
+        upgradeDialog.show();
+        CommonSharePref.getInstance(this).setUpgradeTime(System.currentTimeMillis());
     }
 }

@@ -26,4 +26,6 @@
     <color name="gray_bottom">#999999</color>
     <color name="blue_bottom">#1EAAF1</color>
     <color name="gray_bg">#F0F3F5</color>
+
+    <color name="action_text">#424242</color>
 </resources>

@@ -52,4 +52,7 @@
     <string name="last_verion">已是最新版本，不必更新。</string>
     <string name="action_help">帮助中心</string>
     <string name="action_share">分&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;享</string>
+
+    <string name="upgrade_desc">有新版本：\n%s</string>
+
 </resources>

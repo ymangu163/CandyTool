@@ -24,6 +24,7 @@ import com.candy.tool.utils.GsonUtil;
 import com.tool.librecycle.utils.CommonSharePref;
 import com.tool.librecycle.utils.ToastUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -90,7 +91,6 @@ public class CandyOfficialFragment extends Fragment {
         // 将本次查询的数据添加到bankCards中
         mCandyAdapter.addList(list);
         // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
-        mCurPage++;
         mCandyAdapter.notifyDataSetChanged();
     }
 
@@ -118,10 +118,9 @@ public class CandyOfficialFragment extends Fragment {
     private void queryData(int page, final int actionType, boolean useCache) {
         BmobQuery<OfficialCandy> query = new BmobQuery<>();
         query.order("-updatedAt");
-        // 处理时间查询
         Date date = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-
+        // 处理时间查询
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
             mLoadedAll = false;
@@ -130,8 +129,8 @@ public class CandyOfficialFragment extends Fragment {
                 dateNowStr = dateNowStr.substring(0, 17) + "00";
                 try {
                     date = dateFormat.parse(dateNowStr);
-                } catch (Exception e) {
-                    //
+                } catch (ParseException e) {
+                    date = new Date();
                 }
             } else {
                 date = new Date();
@@ -139,6 +138,7 @@ public class CandyOfficialFragment extends Fragment {
             query.addWhereLessThanOrEqualTo("updatedAt", new BmobDate(date));
         } else {
             if (page == mLastPage) {
+                refreshStat();
                 return;
             }
             // 跳过之前页数并去掉重复数据
@@ -150,7 +150,7 @@ public class CandyOfficialFragment extends Fragment {
 
         //先判断是否有缓存
         boolean isCache = query.hasCachedResult(OfficialCandy.class);
-        if (isCache && useCache) {
+        if (isCache) {
             query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         } else {
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
@@ -186,7 +186,6 @@ public class CandyOfficialFragment extends Fragment {
                 mCandyAdapter.addList(list);
 
                 // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
-                mCurPage++;
                 refreshStat();
             }
 
@@ -241,6 +240,7 @@ public class CandyOfficialFragment extends Fragment {
                         return;
                     }
                     mCandyAdapter.startLoad();
+                    mCurPage++;
                     queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE, true);
                 }
                 mLastVisibleItemPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();

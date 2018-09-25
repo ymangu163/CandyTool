@@ -1,13 +1,8 @@
 package com.candy.tool.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,12 +10,10 @@ import com.candy.tool.R;
 import com.candy.tool.bean.CandyBean;
 import com.candy.tool.bean.InviteUrl;
 import com.candy.tool.bean.MaskUrl;
-import com.candy.tool.utils.CandyUtil;
 import com.candy.tool.utils.StatConstant;
 import com.candy.tool.utils.StatUtil;
 import com.tool.librecycle.activity.BaseActivity;
 import com.tool.librecycle.utils.CommonSharePref;
-import com.tool.librecycle.utils.DisplayUtil;
 
 import java.util.List;
 import java.util.Random;
@@ -43,7 +36,6 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView mDescriptionTv;
     private TextView mDrawTv;
     private ImageView mRedPacket;
-    private AnimatorSet mAnimatorSet;
 
     @Override
     public int getLayoutId() {
@@ -57,23 +49,6 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
         mDrawTv = findViewById(R.id.detail_draw_tv);
         mRedPacket = findViewById(R.id.red_packet_iv);
         mRedPacket.setOnClickListener(this);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (mAnimatorSet != null) {
-            mAnimatorSet.start();
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (mAnimatorSet != null) {
-            mAnimatorSet.removeAllListeners();
-            mAnimatorSet.cancel();
-        }
     }
 
     @Override
@@ -98,7 +73,6 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
 
         getMaskUrls();
         StatUtil.onEvent(StatConstant.CANDY_DETAIL);
-        startPacketAnim();
     }
 
     private String getSingleUrl(CandyBean candyBean) {
@@ -163,7 +137,6 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
 
             StatUtil.onEvent(StatConstant.RED_PACKET_CLICK, "detail");
             CommonSharePref.getInstance(CandyDetailActivity.this).setPaketClickTime(System.currentTimeMillis());
-            mAnimatorSet.cancel();
             mRedPacket.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -184,42 +157,4 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
-    private void startPacketAnim() {
-        long lastClickTime =  CommonSharePref.getInstance(CandyDetailActivity.this).getPaketClickTime();
-        if (CandyUtil.isSameDay(lastClickTime)) {
-            mRedPacket.setVisibility(View.GONE);
-            return;
-        }
-
-        mAnimatorSet = new AnimatorSet();
-
-        ObjectAnimator alphaAnim0 =  ObjectAnimator.ofFloat(mRedPacket,  View.ALPHA,0, 1);
-        alphaAnim0.setDuration(1000);
-
-        ObjectAnimator alphaAnim1 =  ObjectAnimator.ofFloat(mRedPacket,  View.ALPHA,1, 0);
-        alphaAnim1.setDuration(1000);
-
-        ObjectAnimator translateYAnim = ObjectAnimator.ofFloat(mRedPacket,  View.TRANSLATION_Y,0,
-                -DisplayUtil.dip2px(this, 20), 0);
-        translateYAnim.setDuration(1500);
-        translateYAnim.setInterpolator(new BounceInterpolator());
-
-        mAnimatorSet.playSequentially(alphaAnim0, translateYAnim, alphaAnim1);
-        mAnimatorSet.addListener(new AnimatorListenerAdapter() {
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                mRedPacket.postDelayed(packetRunnable, 1000);
-            }
-        });
-        mAnimatorSet.start();
-
-    }
-
-    private Runnable packetRunnable = new Runnable() {
-        @Override
-        public void run() {
-            mAnimatorSet.start();
-        }
-    };
 }

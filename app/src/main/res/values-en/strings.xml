@@ -51,5 +51,6 @@
     <string name="action_help">Help</string>
     <string name="string_copied">Copied</string>
     <string name="last_verion">It\'s the latest version.</string>
+    <string name="action_share">Share</string>
 
 </resources>

@@ -91,7 +91,6 @@ public class CandyUserFragment extends Fragment {
         // 将本次查询的数据添加到bankCards中
         mCandyAdapter.addList(list);
         // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
-        mCurPage++;
         mCandyAdapter.notifyDataSetChanged();
     }
 
@@ -122,7 +121,6 @@ public class CandyUserFragment extends Fragment {
         // 处理时间查询
         Date date = null;
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-
         if (actionType == CandyAdapter.REQUEST_REFRESH) {
             query.setSkip(0);
             mLoadedAll = false;
@@ -132,14 +130,16 @@ public class CandyUserFragment extends Fragment {
                 try {
                     date = dateFormat.parse(dateNowStr);
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    date = new Date();
                 }
             } else {
                 date = new Date();
             }
             query.addWhereLessThanOrEqualTo("updatedAt", new BmobDate(date));
         } else {
+            Log.e("gao", "page: " + page + " lastpage :" + mLastPage);
             if (page == mLastPage) {
+                refreshStat();
                 return;
             }
             // 跳过之前页数并去掉重复数据
@@ -151,19 +151,17 @@ public class CandyUserFragment extends Fragment {
 
         //先判断是否有缓存
         boolean isCache = query.hasCachedResult(CandyBean.class);
-        if (isCache && useCache) {
+        if (isCache) {
             query.setCachePolicy(BmobQuery.CachePolicy.CACHE_ELSE_NETWORK);
         } else {
             query.setCachePolicy(BmobQuery.CachePolicy.NETWORK_ELSE_CACHE);    // 先从网络读取数据，如果没有，再从缓存中获取。
         }
-        Log.e("gao", "start request " + query.toString());
         //设定15秒超时
         mHandler.sendEmptyMessageDelayed(0, 15000);
         // 查找数据
         query.findObjects(new FindListener<CandyBean>() {
             @Override
             public void done(List<CandyBean> list, BmobException e) {
-                Log.e("gao", "request result.");
                 if (e != null) {
                     refreshStat();
                     ToastUtils.showToastForShort(getContext(), getString(R.string.candy_fail));
@@ -191,7 +189,6 @@ public class CandyUserFragment extends Fragment {
                 mSharePref.setCandyLastTime(list.get(list.size() - 1).getCreatedAt());
 
                 // 这里在每次加载完数据后，将当前页码+1，这样在上拉刷新的onPullUpToRefresh方法中就不需要操作curPage了
-                mCurPage++;
                 refreshStat();
             }
 
@@ -244,7 +241,7 @@ public class CandyUserFragment extends Fragment {
                     }
 
                     mCandyAdapter.startLoad();
-                    Log.e("gao", "start loadmore");
+                    mCurPage++;
                     queryData(mCurPage, CandyAdapter.REQUEST_LOADMORE, true);
                 }
                 mLastVisibleItemPosition = ((LinearLayoutManager) mRecyclerView.getLayoutManager()).findLastVisibleItemPosition();

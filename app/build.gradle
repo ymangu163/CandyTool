@@ -20,14 +20,14 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    def verCode = Integer.parseInt(new Date().format("yyyyMMdd"))
+    def verCode = Integer.parseInt(new Date().format("yyyyMMdd")) + 1
     defaultConfig {
         applicationId "com.candy.tool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
         versionCode verCode
-        versionName "1.5.2"
+        versionName "1.6.1"
     }
 
     signingConfigs {
