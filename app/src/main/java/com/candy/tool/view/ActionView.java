@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,10 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
     private Context mContext;
     private TextView mTitleTv;
     private ImageView mBackIv;
-    private ImageView mPacketIv;
-    private String mScene = "";
+    private String mTitle = "";
     private ImageView mShareIv;
+    private boolean mBackAble;
+    private boolean mRightIconAble;
 
     public ActionView(Context context) {
         this(context, null);
@@ -53,59 +55,28 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
 
         mTitleTv = findViewById(R.id.action_title_tv);
         mBackIv = findViewById(R.id.action_back_iv);
-        mPacketIv = findViewById(R.id.action_packet_iv);
         mShareIv = findViewById(R.id.action_share);
         mBackIv.setOnClickListener(this);
-        mPacketIv.setOnClickListener(this);
         mShareIv.setOnClickListener(this);
 
         TypedArray typedArray = mContext.obtainStyledAttributes(attrs, R.styleable.ActionView);
-        mScene = typedArray.getString(R.styleable.ActionView_scene);
+        mTitle = typedArray.getString(R.styleable.ActionView_title);
+        mBackAble = typedArray.getBoolean(R.styleable.ActionView_back_enable, true);
+        mRightIconAble = typedArray.getBoolean(R.styleable.ActionView_right_enable, false);
+        int rightIcon = typedArray.getResourceId(R.styleable.ActionView_right_icon, R.drawable.ic_share);
         typedArray.recycle();
-        updateActionView(mScene);
-    }
 
-    private void updateActionView(String scene) {
-        switch (scene.trim()) {
-            case "recommend":
-                mBackIv.setVisibility(View.GONE);
-                mTitleTv.setText(R.string.recommend_submit);
-                break;
-            case "candy detail":
-                mBackIv.setVisibility(View.VISIBLE);
-                mPacketIv.setImageResource(R.drawable.ic_share);
-                mShareIv.setVisibility(View.GONE);
-                mTitleTv.setText(R.string.candy_detail);
-                break;
-            case "drawer":
-                mBackIv.setVisibility(View.VISIBLE);
-                mPacketIv.setVisibility(View.VISIBLE);
-                mPacketIv.setImageResource(R.drawable.ic_copy);
-                mTitleTv.setText(R.string.candy_draw);
-                break;
-            case "feedback":
-                mBackIv.setVisibility(View.VISIBLE);
-                mPacketIv.setVisibility(View.GONE);
-                mShareIv.setVisibility(View.GONE);
-                mTitleTv.setText(R.string.action_feedback);
-                break;
-            case "my infor":
-                mBackIv.setVisibility(View.GONE);
-                mPacketIv.setVisibility(View.GONE);
-                mShareIv.setVisibility(View.GONE);
-                mTitleTv.setText(R.string.tab_three);
-                break;
-            case "Policy":
-                mTitleTv.setText(R.string.privacy_policy);
-                mPacketIv.setVisibility(View.GONE);
-                mShareIv.setVisibility(View.GONE);
-                break;
-            case "FAQ":
-                mTitleTv.setText(R.string.action_help);
-                mShareIv.setVisibility(View.GONE);
-                break;
-            default:
-                break;
+        mTitleTv.setText(mTitle);
+        mShareIv.setImageResource(rightIcon);
+        if (mBackAble) {
+            mBackIv.setVisibility(View.VISIBLE);
+        } else {
+            mBackIv.setVisibility(View.GONE);
+        }
+        if (mRightIconAble) {
+            mShareIv.setVisibility(View.VISIBLE);
+        } else {
+            mShareIv.setVisibility(View.GONE);
         }
 
     }
@@ -118,21 +89,23 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
             if (mContext instanceof Activity) {
                 ((Activity) mContext).finish();
             }
-        } else if (vId == R.id.action_packet_iv) {
-            handleRedPacket();
         } else if (vId == R.id.action_share) {
-           new ShareDialog(mContext).show();
+            if (TextUtils.equals(mTitle, mContext.getString(R.string.candy_draw))) {
+                copy2Clipboard(((DrawCandyActivity) mContext).getCandyUrl());
+            } else {
+                new ShareDialog(mContext).show();
+            }
         }
 
     }
 
     private void handleRedPacket() {
-        if (mScene.equals("drawer")) {
+        if (mTitle.equals("drawer")) {
             if (mContext instanceof DrawCandyActivity) {
                 copy2Clipboard(((DrawCandyActivity) mContext).getCandyUrl());
                 StatUtil.onEvent(StatConstant.CANDY_COPY);
             }
-        } else if (mScene.equals("candy detail")) {
+        } else if (mTitle.equals("candy detail")) {
             new ShareDialog(mContext).show();
         } else {
             String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
@@ -142,14 +115,14 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
 
             startIntentUrl(mContext, INTENT_URL_FORMAT.replace("{urlCode}", "c1x05828dbb5uwtrasbia19"));
 
-            StatUtil.onEvent(StatConstant.RED_PACKET_CLICK, mScene);
+            StatUtil.onEvent(StatConstant.RED_PACKET_CLICK, mTitle);
         }
     }
 
     /**
      * 打开 Intent Scheme Url
      *
-     * @param context      Parent Activity
+     * @param context       Parent Activity
      * @param intentFullUrl Intent 跳转地址
      * @return 是否成功调用
      */

@@ -15,7 +15,9 @@
     <com.candy.tool.view.ActionView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scene="FAQ"
+        app:title="@string/action_help"
+        app:back_enable="true"
+        app:right_enable="false"
         />
     <ExpandableListView
         android:id="@+id/help_expan_list"

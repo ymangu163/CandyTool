@@ -9,7 +9,9 @@
     <com.candy.tool.view.ActionView
         android:layout_width="match_parent"
         android:layout_height="@dimen/action_height"
-        app:scene="my infor" />
+        app:title="@string/tab_three"
+        app:back_enable="false"
+        />
 
 
     <TextView

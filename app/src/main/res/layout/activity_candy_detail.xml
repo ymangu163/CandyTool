@@ -16,7 +16,10 @@
         android:id="@+id/action_candy_detail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scene="candy detail"
+        app:title="@string/candy_detail"
+        app:back_enable="true"
+        app:right_enable="true"
+        app:right_icon="@drawable/ic_share"
         android:layout_below="@+id/detail_status_space"
         />
 
@@ -47,15 +50,6 @@
         android:padding="16dp"
         android:textIsSelectable="true"
         android:background="@color/white"
-        />
-
-    <ImageView
-        android:id="@+id/red_packet_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_packet_click"
-        android:layout_alignBottom="@+id/detail_description_tv"
-        android:layout_alignParentEnd="true"
         />
 
     <TextView

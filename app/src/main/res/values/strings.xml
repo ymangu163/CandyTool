@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">糖果助手</string>
     <string name="tab_one">糖 果</string>
     <string name="tab_two">推 荐</string>
@@ -53,6 +53,6 @@
     <string name="action_help">帮助中心</string>
     <string name="action_share">分&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;享</string>
 
-    <string name="upgrade_desc">有新版本：\n%s</string>
+    <string name="upgrade_desc" tools:ignore="MissingTranslation">有新版本：\n%s</string>
 
 </resources>

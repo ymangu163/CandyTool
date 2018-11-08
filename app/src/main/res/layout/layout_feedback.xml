@@ -17,7 +17,8 @@
         android:id="@+id/feedback_action"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scene="feedback"
+        app:title="@string/action_feedback"
+        app:back_enable="true"
         android:layout_below="@+id/feedback_status"
         />
 

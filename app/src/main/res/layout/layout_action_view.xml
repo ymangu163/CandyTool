@@ -25,22 +25,13 @@
         />
 
     <ImageView
-        android:id="@+id/action_packet_iv"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/action_height"
-        android:src="@drawable/ic_red_packet"
-        android:layout_alignParentEnd="true"
-        android:paddingRight="16dp"
-        />
-
-    <ImageView
         android:id="@+id/action_share"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/action_height"
         android:src="@drawable/ic_share"
         android:paddingRight="16dp"
-        android:layout_toStartOf="@+id/action_packet_iv"
-        android:visibility="gone"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true"
         />
 
 </merge>

@@ -13,7 +13,11 @@
     <com.candy.tool.view.ActionView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:scene="drawer" />
+        app:title="@string/candy_draw"
+        app:right_enable="true"
+        app:back_enable="true"
+        app:right_icon="@drawable/ic_copy"
+        />
 
     <WebView
         android:id="@+id/draw_webview"

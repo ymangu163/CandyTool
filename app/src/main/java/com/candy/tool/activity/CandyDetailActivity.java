@@ -1,9 +1,7 @@
 package com.candy.tool.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.candy.tool.R;
@@ -29,13 +27,12 @@ import cn.bmob.v3.listener.QueryListener;
  * @date 2018/3/5
  */
 
-public class CandyDetailActivity extends BaseActivity implements View.OnClickListener {
+public class CandyDetailActivity extends BaseActivity {
 
     private final static long INTERVAL_MASK_URL = 24 * 3600 * 1000;
     private TextView mTitleTv;
     private TextView mDescriptionTv;
     private TextView mDrawTv;
-    private ImageView mRedPacket;
 
     @Override
     public int getLayoutId() {
@@ -47,8 +44,6 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
         mTitleTv = findViewById(R.id.detail_title_tv);
         mDescriptionTv = findViewById(R.id.detail_description_tv);
         mDrawTv = findViewById(R.id.detail_draw_tv);
-        mRedPacket = findViewById(R.id.red_packet_iv);
-        mRedPacket.setOnClickListener(this);
     }
 
     @Override
@@ -124,37 +119,5 @@ public class CandyDetailActivity extends BaseActivity implements View.OnClickLis
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        int vId = v.getId();
-        if (vId == R.id.red_packet_iv) {
-            String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
-                    "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2F{urlCode}%3F_s" +
-                    "%3Dweb-other&_t=1472443966571#Intent;" +
-                    "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
-
-            startIntentUrl(CandyDetailActivity.this, INTENT_URL_FORMAT.replace("{urlCode}", "c1x05828dbb5uwtrasbia19"));
-
-            StatUtil.onEvent(StatConstant.RED_PACKET_CLICK, "detail");
-            CommonSharePref.getInstance(CandyDetailActivity.this).setPaketClickTime(System.currentTimeMillis());
-            mRedPacket.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mRedPacket.setVisibility(View.GONE);
-                }
-            }, 1000);
-        }
-    }
-
-    public void startIntentUrl(Context context, String intentFullUrl) {
-        try {
-            Intent intent = Intent.parseUri(
-                    intentFullUrl,
-                    Intent.URI_INTENT_SCHEME);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 }

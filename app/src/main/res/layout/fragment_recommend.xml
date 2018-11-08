@@ -9,8 +9,11 @@
     <com.candy.tool.view.ActionView
         android:id="@+id/recommend_action"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:scene="recommend" />
+        android:layout_height="@dimen/action_height"
+        app:title="@string/tab_two"
+        app:back_enable="false"
+        app:right_enable="false"
+        />
 
     <LinearLayout
         android:id="@+id/candy_name_layout"
