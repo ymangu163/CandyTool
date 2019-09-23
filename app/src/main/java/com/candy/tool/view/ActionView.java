@@ -93,7 +93,12 @@ public class ActionView extends RelativeLayout implements View.OnClickListener {
             if (TextUtils.equals(mTitle, mContext.getString(R.string.candy_draw))) {
                 copy2Clipboard(((DrawCandyActivity) mContext).getCandyUrl());
             } else {
-                new ShareDialog(mContext).show();
+                String INTENT_URL_FORMAT = "intent://platformapi/startapp?saId=10000007&" +
+                        "clientVersion=3.7.0.0718&qrcode=https%3A%2F%2Fqr.alipay.com%2F{urlCode}%3F_s" +
+                        "%3Dweb-other&_t=1472443966571#Intent;" +
+                        "scheme=alipayqr;package=com.eg.android.AlipayGphone;end";
+
+                startIntentUrl(mContext, INTENT_URL_FORMAT.replace("{urlCode}", "c1x05828dbb5uwtrasbia19"));
             }
         }
 

@@ -5,7 +5,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.29.0'
     }
 }
 apply plugin: 'com.android.application'
@@ -20,14 +20,14 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
-    def verCode = Integer.parseInt(new Date().format("yyyyMMdd")) + 1
+    def verCode = Integer.parseInt(new Date().format("yyyyMMdd"))
     defaultConfig {
         applicationId "com.candy.tool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
         versionCode verCode
-        versionName "1.6.1"
+        versionName "1.6.5"
     }
 
     signingConfigs {
@@ -62,6 +62,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def apkName = "BlockChain Candy.apk"
+            outputFileName = apkName
+        }
+    }
+
 
     lintOptions {
         checkReleaseBuilds false
